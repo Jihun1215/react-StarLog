@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 
 export const PageSize = styled.div`
-    max-width: 75rem;
+    max-width: 80rem;
     margin: 1rem auto;
-    background: #FFE7CC;
+    background: #393E46;
     border-radius: 20px;
     justify-content: center;
 `;

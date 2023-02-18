@@ -7,7 +7,7 @@ import { BiStar } from "react-icons/bi";
 
 
 const HeaderArea = styled.div`
-    background: #F8CBA6;
+    background: #222831;
     width: 100%;
     height: 4.25rem;
     border-bottom-left-radius: 2.5rem;
@@ -15,6 +15,9 @@ const HeaderArea = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    color: white;
+
+  
 `;
 
 const HeaderLogo = styled.div`
@@ -25,16 +28,26 @@ const HeaderLogo = styled.div`
     width: 2.1rem;
     height: 2rem;
     gap: 1.25rem;
+    > h2 {
+        font-weight: 700;
+        text-shadow: 2px 2px 2px gray;
+    };
+    > h2:hover {
+        font-weight: 800;
+        background: white;
+    }
     > h3{
         display: flex;
         align-items: center;
         justify-content: center;
         width: 4rem;
         height: 3rem;
+       
     }
     >h3:hover{
         background: white;
         border-radius: 2rem;
+        color: #222831;
         
     }
 `;

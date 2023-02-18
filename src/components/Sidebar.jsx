@@ -22,6 +22,10 @@ function Sidebar() {
     const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : setOpen2('none'));
 
 
+    const onClicktest = () => {
+        alert('작업중..')
+    }
+
 
 
     return (
@@ -39,6 +43,9 @@ function Sidebar() {
 
             </Btn>
 
+            <Btn
+                onClick={onClicktest}
+                sideBtn>테스트</Btn>
             {/* 모달 부분 */}
             <Modaloutside isOpen={open}>
                 <ModalInside isOpen={open}>
@@ -47,13 +54,20 @@ function Sidebar() {
                     <Form />
 
 
-                    <Btn
-                        modalInBtn
-                        onClick={closeModal}
-                        name={'first'}>
-                        close
-                    </Btn>
+                    <div style={{
+                        margin: "1.5625rem 0",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <Btn
+                            modalInBtn
+                            onClick={closeModal}
+                            name={'first'}>
+                            close
+                        </Btn>
 
+                    </div>
 
                 </ModalInside>
             </Modaloutside>
@@ -70,15 +84,15 @@ const SideBar = styled.div`
     left: 8rem;
     top: 20rem;
     background: white;
-    width: 75px;
-    height: 150px;
-    background: #F8CBA6;
+    width: 4.6875rem;
+    height: 10.9375rem;
+    background: #222831;
     border-radius: 3.125rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap :0.9rem;
+    gap :1.25rem;
     z-index: 10;
 `;
 
@@ -112,19 +126,12 @@ const ModalInside = styled.div`
      width: 31.25rem;
      height: 40.625rem;
      background-color: #e0e3fd;
-
-    /* display: ${(props) => props.isOpen};  
-    position: absolute;
-    top: 5%;
-    width: 31.25rem;
-    height: 40.625rem;
-    background-color: #e0e3fd;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5); */
-    > h3 {
+     > h3 {
+        text-align: center;
+        font-weight: 600;
         margin: 20px 0 7px 0;
-        font-size: 25px;
+        font-size: 1.5625rem;
+        text-shadow: 2px 2px 3px rgba(119, 68, 68, 0.2);
        
     };
     

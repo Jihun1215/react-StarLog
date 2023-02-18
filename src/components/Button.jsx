@@ -31,6 +31,7 @@ const DefailtButton = styled.button`
     ${(props) =>
     props.modalInBtn &&
     css`
+      
      width: 17.715rem;
      background-color: #6a75ca;
      color: white;
@@ -38,13 +39,15 @@ const DefailtButton = styled.button`
      border-radius: .625rem;
     `};
 
-     ${(props) => {
-    props.FormBtn &&
-      css`
-        width: 17.715rem;
-        background: red;
+     ${(props) =>
+    props.formBtn &&
+    css`
+      
+      width: 17.715rem;
+      background: #eee;
+    
       `
-  }};
+  };
    
 
 

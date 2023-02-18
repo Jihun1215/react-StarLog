@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import api from "../axios/api"
 import Btn from "./Button";
@@ -23,6 +24,8 @@ export default function ImageUploader() {
         imageFile: imageFile.viewUrl
     }
 
+    const navigate = useNavigate()
+
 
     // 조회 함수
     const fetchTodos = async () => {
@@ -36,18 +39,21 @@ export default function ImageUploader() {
 
     // 추가 함수 
     const onSubmitHandler = async () => {
-
         api.post('/posts', all)
         // 리-렌더링을 위해 조회함수 불러옴 
         fetchTodos();
-        // DB에는 자동으로 아이디가 입력이 되지만 state는 아이디값을 모르기 때문에 계속헤서 오류가 나는것이다 
+
     }
 
 
     const onSumitFormHandler = (e) => {
         e.preventDefault()
-
         onSubmitHandler()
+        setImageFile('');
+        setTitle('');
+        setBody('');
+        navigate('/')
+
     }
     // 조회함수가 렌더링이 되면 리-렌더링이됨 
     useEffect(() => {
@@ -159,7 +165,8 @@ export default function ImageUploader() {
                     required />
 
                 <br /><br />
-                <Btn FormBtn> 게시물 작성 .. !</Btn>
+                <Btn formBtn> 게시물 작성 .. !</Btn>
+
 
             </InputBoxArea>
 
@@ -224,6 +231,7 @@ const SLoading = styled.div`
 
 const InputBoxArea = styled.div`
     border: 1px solid red;
+
     > input {
         width: 100%;
         height: 30%;

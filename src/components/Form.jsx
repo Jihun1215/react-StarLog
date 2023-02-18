@@ -3,34 +3,16 @@ import styled from "styled-components";
 
 const SImageUploaderWrapper = styled.div`
     padding: 7% 15%;
-    box-sizing: border-box;
-`;
+    border: 1px solid red;
 
-const SImageUploaderFrame = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed #1e1e1e;
-    padding: 15px 20px;
-    flex-direction: column;
-    box-sizing: border-box;
-`;
-
-const STitle = styled.div`
-    font-size: 18px;
-    color: #363636;
-    text-align: center;
-    padding: 50px 0 0 0;
-    box-sizing: border-box;
 `;
 
 const SCustomButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 50px 0;
-    box-sizing: border-box;
-    flex-direction: column;
+    margin: .625rem 0;
+    gap: 20px;
 `;
 
 const SCustomButton = styled.div`
@@ -59,18 +41,43 @@ const SImageWrapper = styled.div`
 const SImageArea = styled.img`
     width: 21.875rem;
     height: 12.5rem;
+    
 `;
 
 const SLoading = styled.div`
-    padding: 20px;
-    text-align: center;
+     width: 21.875rem;
+    height: 12.5rem;
+    background : #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
+
+const InputLable = styled.label`
+     width: 17.715rem;
+     
+`;
+
+
 export default function ImageUploader() {
+    const [posts, setPosts] = useState({
+        id: null,
+        viewUrl: "",
+        title: '',
+        body: '',
+    })
+
+
     const [imageFile, setImageFile] = useState({
         imageFile: "",
-        viewUrl: ""
+        viewUrl: "",
     });
+
+
+
+
+    console.log(imageFile.viewUrl)
 
     console.log(imageFile.imageFile)
     const [loaded, setLoaded] = useState(false);
@@ -109,11 +116,16 @@ export default function ImageUploader() {
         <SImageUploaderWrapper>
 
             <SImageWrapper>
-                {imageFile.imageFile !== "" ? (
-                    <SImageArea src={imageFile.viewUrl} />
-                ) : (
-                    <SLoading>Loading...</SLoading>
-                )}
+                {
+                    // 이미지가 있으면 이걸 보여주고 아니면 
+                    imageFile.imageFile !== "" ?
+                        (
+                            <SImageArea src={imageFile.viewUrl} />
+                        ) :
+                        (
+                            <SLoading>Loading...</SLoading>
+                        )
+                }
                 <SCustomInput
                     type="file"
                     // accept='image/*' 속성을 넣어서 image 확장자만 선택적으로 업로드하도록 해주었다.
@@ -123,23 +135,27 @@ export default function ImageUploader() {
                 />
             </SImageWrapper>
 
-            <SImageUploaderFrame>
-                <STitle>이미지를 업로드 하려면 아래 버튼을 클릭</STitle>
-                <SCustomButtonWrapper>
-                    <SCustomButton
-                        btnValue={"primary"}
-                        onClick={() => imageRef.click()}
-                    >
-                        사진 업로드
-                    </SCustomButton>
-                    <SCustomButton
-                        btnValue={"danger"}
-                        onClick={onClickDeleteHandler}
-                    >
-                        사진 삭제
-                    </SCustomButton>
-                </SCustomButtonWrapper>
-            </SImageUploaderFrame>
+
+
+            <SCustomButtonWrapper>
+                <SCustomButton
+                    btnValue={"primary"}
+                    onClick={() => imageRef.click()}
+                >
+                    사진 업로드
+                </SCustomButton>
+                <SCustomButton
+                    btnValue={"danger"}
+                    onClick={onClickDeleteHandler}
+                >
+                    사진 삭제
+                </SCustomButton>
+            </SCustomButtonWrapper>
+
+
+
+
         </SImageUploaderWrapper>
+
     );
 }

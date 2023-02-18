@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import DefailtButton from './Button';
 // 아이콘 불러오기 
@@ -50,14 +50,7 @@ function Sidebar() {
                     <h3>starLog 포스팅하기</h3>
                     <Form />
 
-                    {/* <div className='img_box'></div>
-                    <form onSubmit={onSubmitImgFile}>
-                        <input
-                            type='file'
-                            onChange={onLoadFile} />
-                        <button>등록</button>
-                    </form>
-                    <h2> posts 등록하기</h2> */}
+
                     <DefailtButton modalInBtn
                         onClick={closeModal} name='close'>
                         close
@@ -114,13 +107,13 @@ const ModalInside = styled.div`
     position: absolute;
     top: 5%;
     width: 31.25rem;
-    height: 37.5rem;
+    height: 40.625rem;
     background-color: #e0e3fd;
     border-radius: 10px;
     text-align: center;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
     > h3 {
-        margin: 40px 0 7px 0;
+        margin: 20px 0 7px 0;
         font-size: 25px;
        
     };

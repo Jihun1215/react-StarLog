@@ -4,13 +4,15 @@ import Detail from '../pages/Detail';
 import NotFound from '../pages/NotFound';
 
 const Router = () => {
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/:id' element={<Detail />} />
-            <Route path='/*' element={<NotFound />} />
-        </Routes>
-    </BrowserRouter>
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/:id' element={<Detail />} />
+                <Route path='/*' element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    )
 
 }
 

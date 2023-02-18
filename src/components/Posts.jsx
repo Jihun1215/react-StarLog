@@ -35,16 +35,17 @@ const PostArea = styled.div`
 
 // 여기에서 데이터 받아서 바인딩
 
-function Posts() {
-    return (
-        <PostArea>
-            <img />
-            <h3>title 자리</h3>
-            <p>body 가 들어갈 자리입니다람쥐~~~~~
-                ~~~~~~~~~~ㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴ
-            </p>
-        </PostArea>
-    )
+function Posts(item) {
+  console.log(item.item)
+  return (
+
+    <PostArea>
+      <img src={item.item.viewUrl} />
+      <h3>{item.item.title}</h3>
+      <p>{item.item.body} </p>
+    </PostArea>
+
+  )
 }
 
 export default Posts

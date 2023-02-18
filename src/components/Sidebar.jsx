@@ -45,9 +45,10 @@ function Sidebar() {
             </DefailtButton>
 
             {/* 모달 부분 */}
-            <Modaloutside modal={modal}>
+            {/* <Modaloutside modal={modal}>
                 <ModalInside modal={modal}>
                     <h3>starLog 포스팅하기</h3>
+                    
                     <Form />
 
 
@@ -58,7 +59,7 @@ function Sidebar() {
 
 
                 </ModalInside>
-            </Modaloutside>
+            </Modaloutside> */}
 
         </SideBar>
     )
@@ -90,7 +91,8 @@ const SideBar = styled.div`
 // 밖부분
 const Modaloutside = styled.div`
 /*  */
-    /* display: ${(props) => props.modal};  */
+    /* display: ${(props) => props.modal};   */
+    display: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,8 +104,10 @@ const Modaloutside = styled.div`
     left: 0;
     z-index: 10;
 `;
+
 const ModalInside = styled.div`
-    /* display: ${(props) => props.modal}; */
+    /* display: ${(props) => props.modal};  */
+    display: none;
     position: absolute;
     top: 5%;
     width: 31.25rem;

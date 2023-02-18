@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const SImageUploaderWrapper = styled.div`
     padding: 7% 15%;
@@ -77,9 +78,9 @@ export default function ImageUploader() {
 
 
 
-    console.log(imageFile.viewUrl)
+    // console.log(imageFile.viewUrl)
 
-    console.log(imageFile.imageFile)
+    // console.log(imageFile.imageFile)
     const [loaded, setLoaded] = useState(false);
 
     let imageRef;

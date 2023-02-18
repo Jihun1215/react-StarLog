@@ -6,7 +6,6 @@ import Posts from './Posts'
 
 const ListArea = styled.div`
     padding-top: 3.125rem;
-    border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -18,12 +17,15 @@ const ListArea = styled.div`
 `
 
 
-// 데이터에 map 돌려 Posts 뿌리기
+// 데이터에 map 돌려 P
 
 // 기존값 데이터를 불러와서 여기서 타이터 바인딩 
 function List() {
     return (
         <ListArea>
+            <Posts />
+            <Posts />
+            <Posts />
             <Posts />
             <Posts />
         </ListArea>

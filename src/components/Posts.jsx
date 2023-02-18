@@ -40,7 +40,7 @@ function Posts(item) {
   return (
 
     <PostArea>
-      <img src={item.item.viewUrl} />
+      <img src={item.item.imageFile} />
       <h3>{item.item.title}</h3>
       <p>{item.item.body} </p>
     </PostArea>

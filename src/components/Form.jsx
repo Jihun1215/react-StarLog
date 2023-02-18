@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import api from "../axios/api"
 import Btn from "./Button";
@@ -20,7 +20,7 @@ export default function ImageUploader() {
     const all = {
         title,
         body,
-        imageFile
+        imageFile: imageFile.viewUrl
     }
 
 
@@ -42,11 +42,17 @@ export default function ImageUploader() {
         fetchTodos();
         // DB에는 자동으로 아이디가 입력이 되지만 state는 아이디값을 모르기 때문에 계속헤서 오류가 나는것이다 
     }
+
+
     const onSumitFormHandler = (e) => {
         e.preventDefault()
 
         onSubmitHandler()
     }
+    // 조회함수가 렌더링이 되면 리-렌더링이됨 
+    useEffect(() => {
+        fetchTodos();
+    }, []);
 
 
 
@@ -70,7 +76,6 @@ export default function ImageUploader() {
         }
         fileReader.onload = () => {
             setImageFile({
-                imageFile: e.target.files[0],
                 viewUrl: fileReader.result
             });
             console.log(fileReader.result)
@@ -84,7 +89,6 @@ export default function ImageUploader() {
     const onClickDeleteHandler = () => {
         // console.log("사진 삭제 버튼 클릭");
         setImageFile({
-            imageFile: "",
             viewUrl: ""
         });
     };
@@ -98,7 +102,8 @@ export default function ImageUploader() {
                     imageFile.imageFile !== "" ?
                         (
                             <SImageArea src={imageFile.viewUrl} />
-                        ) :
+                        )
+                        :
                         (
                             <SLoading>Loading...</SLoading>
                         )
@@ -130,32 +135,36 @@ export default function ImageUploader() {
                 </SCustomButton>
             </SCustomButtonWrapper>
 
-            <label>title</label>
-
-            <input
-                type="text"
-                value={title}
-                onChange={(e) => {
-                    setTitle(e.target.value)
-                }}
-                required />
-
-            <br /><br />
-
-            <label>body</label>
-
-            <input
-                type="text"
-                value={body}
-                onChange={onChangeBodyHandler}
-                required />
-
-            <br /><br />
-            <Btn FormBtn> 올리기러기</Btn>
 
 
+            <InputBoxArea>
+                <label>title</label>
 
-        </SImageUploaderWrapper>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => {
+                        setTitle(e.target.value)
+                    }}
+                    required />
+
+                <br /><br />
+
+                <label>body</label>
+
+                <input
+                    type="text"
+                    value={body}
+                    onChange={onChangeBodyHandler}
+                    required />
+
+                <br /><br />
+                <Btn FormBtn> 게시물 작성 .. !</Btn>
+
+            </InputBoxArea>
+
+
+        </SImageUploaderWrapper >
 
     );
 }
@@ -213,8 +222,10 @@ const SLoading = styled.div`
     justify-content: center;
 `;
 
-
-const InputLable = styled.label`
-     width: 17.715rem;
-     
+const InputBoxArea = styled.div`
+    border: 1px solid red;
+    > input {
+        width: 100%;
+        height: 30%;
+    }
 `;

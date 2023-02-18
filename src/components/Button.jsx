@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export default function defailtButton(props) {
+export default function Btn(props) {
   //{...props}는 props 가져와 css작업 {props.children} 안에 글자 표시
   return <DefailtButton {...props}>{props.children}</DefailtButton>;
 }
@@ -37,7 +37,13 @@ const DefailtButton = styled.button`
      text-align: center;
      border-radius: .625rem;
     `};
-    
+
+     ${(props) => {
+    props.FormBtn &&
+      css`
+        width: 17.715rem;
+      `
+  }};
    
 
 

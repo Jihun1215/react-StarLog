@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import DefailtButton from './Button';
+import Btn from './Button';
 // 아이콘 불러오기 
 import { BiHeart } from "react-icons/bi";
 import { BiPlus } from "react-icons/bi"
@@ -13,53 +13,50 @@ import Form from './Form';
 
 
 function Sidebar() {
+    // 모달창 display 속성 none / block
+    const [open, setOpen] = useState('none');
+    const [open2, setOpen2] = useState('none');
 
-    const [modal, setModal] = useState('none');
-    const [modal2, setModal2] = useState('none');
+    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : setOpen2('block'));
 
-
-    const OpenModal = (e) => (
-        e.target.name === 'one' ? setModal('block') : setModal2('block')
-    );
-
-    // close버튼 클릭시
-    const closeModal = (e) => (
-        e.target.name === 'close' ? setModal('none') : setModal2('none')
-    );
+    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : setOpen2('none'));
 
 
 
 
     return (
         <SideBar>
-            <DefailtButton
-                name='one'
+            <Btn
+                name={'first'}
                 onClick={OpenModal}
                 sideBtn>
 
-                <BiPlus style={{
-                    width: "1.4rem",
-                    height: "1.5rem"
-                }} />
+                <BiPlus
+                    onClick={OpenModal}
+                    style={{
+                        fontSize: "1.25rem"
+                    }} />
 
-            </DefailtButton>
+            </Btn>
 
             {/* 모달 부분 */}
-            {/* <Modaloutside modal={modal}>
-                <ModalInside modal={modal}>
+            <Modaloutside isOpen={open}>
+                <ModalInside isOpen={open}>
                     <h3>starLog 포스팅하기</h3>
-                    
+
                     <Form />
 
 
-                    <DefailtButton modalInBtn
-                        onClick={closeModal} name='close'>
+                    <Btn
+                        modalInBtn
+                        onClick={closeModal}
+                        name={'first'}>
                         close
-                    </DefailtButton>
+                    </Btn>
 
 
                 </ModalInside>
-            </Modaloutside> */}
+            </Modaloutside>
 
         </SideBar>
     )
@@ -90,24 +87,33 @@ const SideBar = styled.div`
 
 // 밖부분
 const Modaloutside = styled.div`
-/*  */
-    /* display: ${(props) => props.modal};   */
-    display: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
+    display: ${(props) => props.isOpen};
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    z-index: 10;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
 `;
 
 const ModalInside = styled.div`
-    /* display: ${(props) => props.modal};  */
-    display: none;
+
+     display: ${(props) => props.isOpen};
+    
+     z-index: 10;
+     // 중앙배치
+     // absolute : 상위요소 비례해서..
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     border-radius: 20px;
+     background-color: ${(props) => props.color};
+     width: 31.25rem;
+     height: 40.625rem;
+     background-color: #e0e3fd;
+
+    /* display: ${(props) => props.isOpen};  
     position: absolute;
     top: 5%;
     width: 31.25rem;
@@ -115,7 +121,7 @@ const ModalInside = styled.div`
     background-color: #e0e3fd;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5); */
     > h3 {
         margin: 20px 0 7px 0;
         font-size: 25px;
@@ -124,10 +130,3 @@ const ModalInside = styled.div`
     
  
 `;
-
-
-
-
-
-// width: 31.25rem;
-// height: 37.5rem;

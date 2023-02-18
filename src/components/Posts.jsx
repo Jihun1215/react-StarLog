@@ -36,7 +36,7 @@ const PostArea = styled.div`
 // 여기에서 데이터 받아서 바인딩
 
 function Posts(item) {
-  console.log(item.item)
+  // console.log(item.item)
   return (
 
     <PostArea>

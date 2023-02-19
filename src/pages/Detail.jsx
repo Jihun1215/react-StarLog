@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header'
 import Btn from '../components/Button';
+import api from "../axios/api"
 
 
 
@@ -15,6 +16,35 @@ function Detail() {
     console.log(state)
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();
+
+    const [posts, setPosts] = useState(null);
+
+    // 조회 함수
+    const fetchTodos = async () => {
+        // const { data } = await axios.get("http://localhost:4001/todos");
+        const { data } = await api.get('/posts')
+        setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+    };
+    console.log(posts)
+
+    useEffect(() => {
+        fetchTodos();
+    }, [posts]);
+
+    // 삭제 함수 
+    // 삭제를 해야 하니 인자 값으로 어떤걸 삭제 해야 되는지를 알려줘야 한다 
+    const onDeleteButtonClickHandler = async (id) => {
+        // axios.delete(`http://localhost:4001/todos/${id}`);
+        api.delete(`/posts/${id}`)
+        // 삭제되고 렌더링을 시키려면 어떻게 접근 해야 할까 ? 
+        setPosts(posts.filter((item) => {
+            return item.id !== id
+        }))
+    }
+
+
+
+
 
     return (
         <DeatailPageSize>
@@ -47,7 +77,12 @@ function Detail() {
 
 
 
-            <Btn detaildetail>
+            <Btn onClick={(() => {
+                onDeleteButtonClickHandler(state.item.id)
+                navigate('/')
+            })}
+
+                detaildetail>
                 삭제하기
             </Btn>
         </DeatailPageSize >

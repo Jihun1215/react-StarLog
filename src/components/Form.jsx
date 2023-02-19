@@ -19,18 +19,14 @@ export default function ImageUploader() {
     // body  입력값을 위해서 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [user, setUser] = useState('');
 
     // axios로 저장하기 위해 만든 객체 
     const all = {
         title,
         body,
         imageFile: imageFile.viewUrl,
-        user: '',
-        commit: {
-            username: '',
-            usercommit: '',
-        }
-
+        user,
     }
 
     const navigate = useNavigate()
@@ -59,6 +55,9 @@ export default function ImageUploader() {
     const onChangeBodyHandler = (e) => {
         setBody(e.target.value)
     }
+    const onChangeUserHandler = (e) => {
+        setUser(e.target.value)
+    }
 
     // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
     const onSumitFormHandler = (e) => {
@@ -69,7 +68,7 @@ export default function ImageUploader() {
         setTitle('');
         setBody('');
         // 이걸 바꿔야하는데 어떻게 하면 바꿀수 있을지 생각해보자! 
-         window.location.reload()
+        window.location.reload()
 
     }
     // 조회함수가 렌더링이 되면 리-렌더링이됨 
@@ -176,6 +175,14 @@ export default function ImageUploader() {
                     type="text"
                     value={body}
                     onChange={onChangeBodyHandler}
+                    required />
+                <br /><br />
+
+                <label>usery</label>
+                <input
+                    type="text"
+                    value={user}
+                    onChange={onChangeUserHandler}
                     required />
 
                 <br /><br />

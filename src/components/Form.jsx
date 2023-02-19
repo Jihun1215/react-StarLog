@@ -140,18 +140,18 @@ export default function ImageUploader() {
 
 
             <SCustomButtonWrapper>
-                <SCustomButton
-                    btnValue={"primary"}
+                <Btn
+                    addimgbtn
                     onClick={() => imageRef.click()}
                 >
                     사진 업로드
-                </SCustomButton>
-                <SCustomButton
-                    btnValue={"danger"}
+                </Btn>
+                <Btn
+                    deleteimgbtn
                     onClick={onClickDeleteHandler}
                 >
                     사진 삭제
-                </SCustomButton>
+                </Btn>
             </SCustomButtonWrapper>
 
 
@@ -199,8 +199,9 @@ export default function ImageUploader() {
 
 
 const SImageUploaderWrapper = styled.form`
-    padding: 7% 15%;
+    padding: .625rem;
     border: 1px solid red;
+    margin: 0 auto;
 
 `;
 
@@ -210,34 +211,28 @@ const SCustomButtonWrapper = styled.div`
     align-items: center;
     margin: .625rem 0;
     gap: 20px;
+   
 `;
 
-const SCustomButton = styled.div`
-    text-align: center;
-    width: 150px;
-    padding: 10px 15px;
-    border-radius: 7px;
-    cursor: pointer;
-    margin: 0 0 20px 0;
-    box-sizing: border-box;
-    background-color: ${({ btnValue }) =>
-        btnValue === "primary" ? "rgb(50, 111, 233)" : "rgb(238, 134, 131)"};
-    color: #fff;
-`;
+
 
 const SCustomInput = styled.input`
     display: none;
+    margin: 0 auto;
 `;
 
 const SImageWrapper = styled.div`
     width: 100%;
     height: 100%;
+    margin: 0 auto;
+  
 `;
 
 // 이미지 표시하기 
 const SImageArea = styled.img`
     width: 21.875rem;
     height: 12.5rem;
+    margin: 0 auto;
     
 `;
 
@@ -248,6 +243,8 @@ const SLoading = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: black;
+    margin: 0 auto;
 `;
 
 const InputBoxArea = styled.div`

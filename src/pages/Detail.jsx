@@ -29,7 +29,7 @@ function Detail() {
 
     return (
         <DeatailPageSize>
-            <Sidebar />
+            <Sidebar state={state} />
             <Header />
             <DetailpageArea>
                 <img src={state.item.imageFile}>

@@ -55,14 +55,28 @@ const DefailtButton = styled.button`
     width : 18.75rem;
     height: 3.125rem;
   `};
-  ${(props) =>
-    props.detaildetail &&
+    ${(props) =>
+    props.addimgbtn &&
     css`
-    margin: 0 auto;
-    width : 18.75rem;
-    height: 3.125rem;
-  `}
-   
+    width: 9.375rem;
+    padding: .625rem .9375rem;
+    border-radius: .4375rem;
+    margin: 0 0 1.25rem 0;
+    background: #326fe9;
+  `};
+    ${(props) =>
+    props.deleteimgbtn &&
+    css`
+    width: 9.375rem;
+    padding: .625rem .9375rem;
+    border-radius: .4375rem;
+    margin: 0 0 1.25rem 0;
+    background: #ee8683;
+  `};
+
+
+
+  
 
 
 

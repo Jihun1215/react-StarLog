@@ -125,13 +125,16 @@ const ModalInside = styled.div`
      background-color: ${(props) => props.color};
      width: 31.25rem;
      height: 40.625rem;
-     background-color: #e0e3fd;
+     background-color: #495057;
+     color: #fff;
+    
      > h3 {
         text-align: center;
         font-weight: 600;
         margin: 20px 0 7px 0;
         font-size: 1.5625rem;
         text-shadow: 2px 2px 3px rgba(119, 68, 68, 0.2);
+       
        
     };
     

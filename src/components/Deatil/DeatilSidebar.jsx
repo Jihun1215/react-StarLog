@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { BiHeart } from "react-icons/bi";
 import { BiPlus } from "react-icons/bi"
 import { AiFillDelete } from "react-icons/ai"
+import { AiFillEdit } from "react-icons/ai"
 import api from '../../axios/api'
 
 
@@ -15,20 +16,28 @@ import api from '../../axios/api'
 
 
 
-function Sidebar() {
+function Sidebar(state) {
+    // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
-    const [open2, setOpen2] = useState('none');
-
-    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : setOpen2('block'));
-
-    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : setOpen2('none'));
 
 
-    // const onClicktest = () => {
-    //     alert('작업중..')
-    // }
+    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : console.log('d'));
+
+    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : console.log('d'));
+
+
+
     const [posts, setPosts] = useState(null);
+
+    // Deatil에서 수정을 위한 State들 
+    // 현재있는디테일페이지에 id값을 받아와서 적용
+    const [tagetId, setTagetId] = useState(state.state.item.id);
+    // 변경할 내용들을 담을 state 들
+    const [tagetTitle, setTagetTitle] = useState('');
+    const [tagetBody, setTagetBody] = useState('');
+
+
 
 
     const navigate = useNavigate()
@@ -36,10 +45,8 @@ function Sidebar() {
     const fetchPosts = async () => {
         // const { data } = await axios.get("http://localhost:4001/todos");
         const { data } = await api.get('/posts')
-        console.log(data)
         setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
     };
-    console.log(posts)
 
     useEffect(() => {
         fetchPosts();
@@ -57,6 +64,22 @@ function Sidebar() {
         navigate('/')
     }
 
+    // 수정 함수 
+    const onUpdateButtonClickHandler = async () => {
+        // axios.patch(`http://localhost:4001/todos/${targetID}`, {
+        //   title: contents,
+        // });
+        api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
+        setPosts(posts.map((item) => {
+            // targetID string item.id는 number여서 == 로 진행 
+            // console.log(typeof targetID)
+            // console.log(typeof item.id)
+            if (item.id == tagetId) return { ...item, title: tagetTitle, body: tagetBody }
+            else return item
+        }))
+    }
+
+
 
     return (
         <SideBar>
@@ -65,7 +88,7 @@ function Sidebar() {
                 onClick={OpenModal}
                 sideBtn>
 
-                <BiPlus
+                <AiFillEdit
                     onClick={OpenModal}
                     style={{
                         fontSize: "1.25rem"
@@ -79,7 +102,56 @@ function Sidebar() {
                 })}
                 sideBtn><AiFillDelete style={{ fontSize: "1.25rem" }} /></Btn>
 
+            {/* 모달 부분 */}
+            <Modaloutside isOpen={open}>
+                <ModalInside isOpen={open}>
+                    <h3>Posts 수정하기</h3>
 
+                    <ModalInputBox>
+                        <div>
+                            <label>제목수정</label>
+                            <input
+                                type="text"
+                                value={tagetTitle}
+                                onChange={((e) => {
+                                    setTagetTitle(e.target.value)
+                                })}
+                                placeholder="수정할제목넣어" />
+                        </div>
+
+                        <br />
+
+                        <input
+                            type="text"
+                            value={tagetBody}
+                            onChange={((e) => {
+                                setTagetBody(e.target.value)
+                            })}
+                            placeholder="수정할내용넣어" />
+                        <br />
+                        <br />
+                        <button onClick={onUpdateButtonClickHandler}>수정하기</button>
+                        <br />
+                    </ModalInputBox>
+
+
+                    <div style={{
+                        margin: "1.5625rem 0",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <Btn
+                            modalInBtn
+                            onClick={closeModal}
+                            name={'first'}>
+                            close
+                        </Btn>
+
+                    </div>
+
+                </ModalInside>
+            </Modaloutside>
 
         </SideBar>
     )
@@ -120,12 +192,8 @@ const Modaloutside = styled.div`
 `;
 
 const ModalInside = styled.div`
-
      display: ${(props) => props.isOpen};
-    
      z-index: 10;
-     // 중앙배치
-     // absolute : 상위요소 비례해서..
      position: absolute;
      top: 50%;
      left: 50%;
@@ -133,16 +201,37 @@ const ModalInside = styled.div`
      border-radius: 20px;
      background-color: ${(props) => props.color};
      width: 31.25rem;
-     height: 40.625rem;
-     background-color: #e0e3fd;
+     height: 31.25rem;
+     background: #495057;
      > h3 {
+        color: #fff;
         text-align: center;
         font-weight: 600;
-        margin: 20px 0 7px 0;
+        margin: 1.25rem 0 .4375rem 0;
         font-size: 1.5625rem;
-        text-shadow: 2px 2px 3px rgba(119, 68, 68, 0.2);
+        text-shadow: .125rem .125rem .1875rem rgba(119, 68, 68, 0.2);
        
     };
     
  
+`;
+
+const ModalInputBox = styled.div`
+    margin: 2.5rem auto;
+    width: 25rem;
+    height: 18.75rem;
+    border: 1px solid black;
+    text-align: center;
+    padding: .625rem;
+    > div {
+        margin: 1.25rem auto;
+        width: 21.875rem;
+        height: 6.25rem;
+        border: 1px solid black;
+    };
+    > label {
+        width: 100%;
+        height: 50%;
+    } ;
+    
 `;

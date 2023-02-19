@@ -9,8 +9,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
      font-weight: normal;
     font-style: normal;
-    max-width: 81.25rem;
-    max-height: 62.5rem;
+    
  }
 `;
 

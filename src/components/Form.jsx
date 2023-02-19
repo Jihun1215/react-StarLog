@@ -15,58 +15,72 @@ export default function ImageUploader() {
         imageFile: "",
         viewUrl: "",
     });
+    // title 입력값을 위해서 
+    // body  입력값을 위해서 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
+    // axios로 저장하기 위해 만든 객체 
     const all = {
         title,
         body,
-        imageFile: imageFile.viewUrl
+        imageFile: imageFile.viewUrl,
+        user: '',
+        commit: {
+            username: '',
+            usercommit: '',
+        }
+
     }
 
     const navigate = useNavigate()
-
+    // const gotoHomepage = () => {
+    //     navigate('/')
+    // }
 
     // 조회 함수
-    const fetchTodos = async () => {
+    const fetchPosts = async () => {
         // const { data } = await axios.get("http://localhost:4001/todos");
         const { data } = await api.get('/posts')
         setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
     };
-    const onChangeBodyHandler = (e) => {
-        setBody(e.target.value)
-    }
+
+    // console.log('Posts', posts)
 
     // 추가 함수 
     const onSubmitHandler = async () => {
         api.post('/posts', all)
+        setPosts([...posts, all])
         // 리-렌더링을 위해 조회함수 불러옴 
-        fetchTodos();
+        fetchPosts();
 
     }
 
+    const onChangeBodyHandler = (e) => {
+        setBody(e.target.value)
+    }
 
+    // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
     const onSumitFormHandler = (e) => {
         e.preventDefault()
         onSubmitHandler()
+        alert('저장완료! ')
         setImageFile('');
         setTitle('');
         setBody('');
-        navigate('/')
+        // 이걸 바꿔야하는데 어떻게 하면 바꿀수 있을지 생각해보자! 
+         window.location.reload()
 
     }
     // 조회함수가 렌더링이 되면 리-렌더링이됨 
     useEffect(() => {
-        fetchTodos();
+        fetchPosts();
     }, []);
 
 
 
 
 
-    // console.log(imageFile.viewUrl)
-
-    // console.log(imageFile.imageFile)
     const [loaded, setLoaded] = useState(false);
 
     let imageRef;
@@ -84,10 +98,10 @@ export default function ImageUploader() {
             setImageFile({
                 viewUrl: fileReader.result
             });
-            console.log(fileReader.result)
+            // console.log(fileReader.result)
             setLoaded(true);
         };
-        console.log(loaded);
+        // console.log(loaded);
     };
 
 

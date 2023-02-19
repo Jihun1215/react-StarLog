@@ -49,7 +49,7 @@ function Sidebar() {
             {/* 모달 부분 */}
             <Modaloutside isOpen={open}>
                 <ModalInside isOpen={open}>
-                    <h3>starLog 포스팅하기</h3>
+                    <h3>Posting</h3>
 
                     <Form />
 

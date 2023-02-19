@@ -66,11 +66,20 @@ const DefailtButton = styled.button`
   `};
     ${(props) =>
     props.deleteimgbtn &&
-    css`
+    css` 
     width: 9.375rem;
     padding: .625rem .9375rem;
     border-radius: .4375rem;
     margin: 0 0 1.25rem 0;
+    background: #ee8683;
+  `};
+  ${(props) =>
+    props.detailformbtn &&
+    css`
+    width: 9.375rem;
+    padding: .625rem .9375rem;
+    border-radius: .4375rem;
+    margin: 0 auto;
     background: #ee8683;
   `};
 

@@ -199,6 +199,8 @@ export default function ImageUploader() {
 
 
 const SImageUploaderWrapper = styled.form`
+    width: 500px;
+    height: 500px;
     padding: .625rem;
     border: 1px solid red;
     margin: 0 auto;
@@ -220,38 +222,47 @@ const SCustomInput = styled.input`
     display: none;
     margin: 0 auto;
 `;
-
+// 사진 감싸는 div 
 const SImageWrapper = styled.div`
     width: 100%;
-    height: 100%;
+    height: 45%;
     margin: 0 auto;
-  
 `;
 
 // 이미지 표시하기 
 const SImageArea = styled.img`
-    width: 21.875rem;
+     width: 100%;
     height: 12.5rem;
-    margin: 0 auto;
+   text-align: center;
     
 `;
 
 const SLoading = styled.div`
-     width: 21.875rem;
+      width: 100%;
     height: 12.5rem;
-    background : #eee;
+    background : #868E96;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: #fff;
+    font-size: 1.2rem;
     margin: 0 auto;
 `;
 
 const InputBoxArea = styled.div`
-    border: 1px solid red;
+    text-align: center;
+
+    >label {
+       padding: 0 1rem;
+       font-size: 1.25rem;
+
+    }
 
     > input {
-        width: 100%;
-        height: 30%;
-    }
+    
+       width: 15.625rem;
+       height: 2.5rem;
+       border-radius: 1.875rem;
+       padding-left: 1.25rem;
+    };
 `;

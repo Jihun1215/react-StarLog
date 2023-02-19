@@ -66,9 +66,7 @@ function Sidebar(state) {
 
     // 수정 함수 
     const onUpdateButtonClickHandler = async () => {
-        // axios.patch(`http://localhost:4001/todos/${targetID}`, {
-        //   title: contents,
-        // });
+
         api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
         setPosts(posts.map((item) => {
             // targetID string item.id는 number여서 == 로 진행 
@@ -79,6 +77,12 @@ function Sidebar(state) {
         }))
     }
 
+    const onSubmitChangePosts = (e) => {
+        e.preventDefault();
+        alert('수정완료!')
+        onUpdateButtonClickHandler();
+        window.location.reload()
+    }
 
 
     return (
@@ -107,39 +111,40 @@ function Sidebar(state) {
                 <ModalInside isOpen={open}>
                     <h3>Posts 수정하기</h3>
 
-                    <ModalInputBox>
+                    <ModalInputBox onSubmit={onSubmitChangePosts}>
                         <div>
-                            <label>제목수정</label>
-                            <input
+                            <ModalInputName>제목수정</ModalInputName>
+                            <ModalFormInput
                                 type="text"
                                 value={tagetTitle}
                                 onChange={((e) => {
                                     setTagetTitle(e.target.value)
                                 })}
+                                required
                                 placeholder="수정할제목넣어" />
                         </div>
 
-                        <br />
-
-                        <input
-                            type="text"
-                            value={tagetBody}
-                            onChange={((e) => {
-                                setTagetBody(e.target.value)
-                            })}
-                            placeholder="수정할내용넣어" />
-                        <br />
-                        <br />
-                        <button onClick={onUpdateButtonClickHandler}>수정하기</button>
-                        <br />
+                        <div>
+                            <ModalInputName>내용수정</ModalInputName>
+                            <ModalFormInput
+                                type="text"
+                                value={tagetBody}
+                                onChange={((e) => {
+                                    setTagetBody(e.target.value)
+                                })}
+                                required
+                                placeholder="수정할내용넣어" />
+                        </div>
+                        <main style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <Btn
+                                detailformbtn
+                                onClick={onUpdateButtonClickHandler}>수정하기</Btn>
+                        </main>
                     </ModalInputBox>
 
 
                     <div style={{
-                        margin: "1.5625rem 0",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
+                        margin: "1.5625rem 0", display: "flex", alignItems: "center", justifyContent: "center"
                     }}>
                         <Btn
                             modalInBtn
@@ -216,22 +221,36 @@ const ModalInside = styled.div`
  
 `;
 
-const ModalInputBox = styled.div`
+const ModalInputBox = styled.form`
     margin: 2.5rem auto;
     width: 25rem;
-    height: 18.75rem;
+    height: 20.3125rem;
     border: 1px solid black;
-    text-align: center;
     padding: .625rem;
+
     > div {
-        margin: 1.25rem auto;
+        margin: .625rem auto;
         width: 21.875rem;
-        height: 6.25rem;
+        height: 7.5rem;
         border: 1px solid black;
-    };
-    > label {
-        width: 100%;
-        height: 50%;
-    } ;
-    
+        display: flex;
+        flex-direction: column;
+        padding: .9375rem
+    };  
 `;
+
+const ModalFormBtnBox = styled.div`
+    border: 1px solid red;
+`
+
+const ModalInputName = styled.label`
+    color: #fff;
+    padding: .625rem;
+`;
+const ModalFormInput = styled.input`
+    width: 15.625rem;
+    height: 2.1875rem;
+    border: none;
+    border-radius: 1.875rem;
+    padding-left: 1.25rem;
+`

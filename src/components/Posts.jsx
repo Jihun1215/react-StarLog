@@ -29,7 +29,6 @@ function Posts(item) {
         <WrapH3>{item.item.title}</WrapH3>
         <WarpP>{item.item.body} </WarpP>
         <WarpSpan>23.02.19</WarpSpan>
-
       </div>
 
 
@@ -59,27 +58,33 @@ const WrapImg = styled.img`
     width: 12.5rem;
     height: 11.25rem;
     background: #eee;
-    border: 1px solid red;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `;
 const WrapH3 = styled.h3`
-    margin-top: .625rem;
+    margin: .625rem 0;
     width: 35.4375rem;
     height: 2.625rem;
     padding: .625rem;
-    border: 1px solid red;
+    background: #EEEEEE;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
 `;
 const WarpP = styled.p`
-  margin-top: .3125rem;
+  margin-bottom: .625rem;
   padding: .625rem;
   width: 35.375rem;
   height: 6.25rem;
-  border: 1px solid red;
-`
-const WarpSpan = styled.p`
-  margin-top: 1.25rem;
-  width: 8.0625rem;
-  height: 1.125rem;
-  border: 1px solid red;
+  background: #EEEEEE;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  
 
 `
+const WarpSpan = styled.p`
+  width: 8.0625rem;
+  height: 1.125rem;
+  background: #EEEEEE;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+`
+
+

@@ -48,6 +48,20 @@ const DefailtButton = styled.button`
     
       `
   };
+  ${(props) =>
+    props.gobackhome &&
+    css`
+    margin: 0 auto;
+    width : 18.75rem;
+    height: 3.125rem;
+  `};
+  ${(props) =>
+    props.detaildetail &&
+    css`
+    margin: 0 auto;
+    width : 18.75rem;
+    height: 3.125rem;
+  `}
    
 
 

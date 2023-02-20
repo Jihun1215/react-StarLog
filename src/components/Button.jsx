@@ -29,11 +29,26 @@ const DefailtButton = styled.button`
     `};
     
     ${(props) =>
-    props.modalInBtn &&
+    props.addbtn &&
     css`
       
-     width: 17.715rem;
+     width: 9.375rem;
+     height: 2.5rem;
+     
      background-color: #6a75ca;
+     color: white;
+     text-align: center;
+     border-radius: .625rem;
+    `};
+
+    ${(props) =>
+    props.backbtn &&
+    css`
+      
+     width: 9.375rem;
+     height: 2.5rem;
+     
+     background-color: #ee8683;
      color: white;
      text-align: center;
      border-radius: .625rem;
@@ -53,7 +68,7 @@ const DefailtButton = styled.button`
     css`
     margin: 0 auto;
     width : 18.75rem;
-    height: 3.125rem;
+    height: 3.125rem;                  
   `};
     ${(props) =>
     props.addimgbtn &&

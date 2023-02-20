@@ -43,14 +43,20 @@ function Sidebar(ThisData) {
 
     // 삭제 
     const onDeleteButtonClickHandler = async (id) => {
-        dispatch(__deletePost(id))
+        const isTrue = window.confirm('삭제하시겠습니까 ?');
+        if (isTrue === true) {
+            dispatch(__deletePost(id));
+            navigate('/');
+        }
+
+
         // // axios.delete(`http://localhost:4001/todos/${id}`);
         // api.delete(`/posts/${id}`)
         // // 삭제되고 렌더링을 시키려면 어떻게 접근 해야 할까 ? 
         // setPosts(posts.filter((item) => {
         //     return item.id !== id
         // }))
-        navigate('/')
+
     }
 
     // // 수정 함수 
@@ -170,9 +176,6 @@ const SideBar = styled.div`
     z-index: 10;
 `;
 
-
-
-
 // 밖부분
 const Modaloutside = styled.div`
     display: ${(props) => props.isOpen};
@@ -228,8 +231,7 @@ const ModalInputBox = styled.form`
 `;
 
 const ModalFormBtnBox = styled.div`
-    border: 1px solid red;
-`
+`;
 
 const ModalInputName = styled.label`
     color: #fff;

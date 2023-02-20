@@ -68,8 +68,6 @@ function Sidebar() {
         e.preventDefault()
         await dispatch(__postPosts(total))
         dispatch(__getPosts())
-
-
         setImageFile('');
         setTitle('');
         setBody('');

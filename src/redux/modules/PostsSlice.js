@@ -103,7 +103,6 @@ export const PostsSlice = createSlice({
         },
 
         // __deletePosts
-        // __postPosts
         // 실행중
         [__deletePost.pending]: (state, action) => {
             state.isLoading = true;

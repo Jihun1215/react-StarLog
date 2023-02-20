@@ -16,7 +16,7 @@ import { __deletePost, __getPosts } from '../../redux/modules/PostsSlice';
 
 
 function Sidebar(ThisData) {
-    // console.log(ThisData.ThisData)
+    console.log(ThisData.ThisData.id)
     // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
@@ -36,7 +36,7 @@ function Sidebar(ThisData) {
     const [tagetBody, setTagetBody] = useState('');
 
 
-    
+
 
     const navigate = useNavigate()
 
@@ -90,7 +90,7 @@ function Sidebar(ThisData) {
 
             <Btn
                 onClick={(() => {
-                    onDeleteButtonClickHandler(posts[0].id)
+                    onDeleteButtonClickHandler(ThisData.ThisData.id)
                 })}
                 sideBtn><AiFillDelete style={{ fontSize: "1.25rem" }} /></Btn>
 

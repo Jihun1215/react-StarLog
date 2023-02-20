@@ -320,7 +320,6 @@ const SImageUploaderWrapper = styled.form`
     width: 100%;
     height: 100%;
     padding: .625rem;
-    border: 1px solid red;
     margin: 0 auto;
     > h3 {
         text-align: center;

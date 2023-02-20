@@ -32,7 +32,7 @@ function List() {
         navigate(`/${id}`
         )
     }
-  
+
     // 컴포넌트가 마운트 될 때만 이 함수를 호출할수 있게 
     useEffect(() => {
         dispatch(__getPosts())
@@ -91,7 +91,7 @@ function List() {
                             <div>
                                 <WrapH3>{item.title}</WrapH3>
                                 <WarpP>{item.body} </WarpP>
-                             
+                                <WarpSpan>{item.user}</WarpSpan>
                             </div>
 
                         </PostArea>

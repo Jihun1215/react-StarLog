@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import starlog from "../modules/starlog";
+import postslist from '../modules/getPostsSlice'
 
 
 
 const store = configureStore({
     reducer: {
-        starlog
+        postslist,
     },
 });
 

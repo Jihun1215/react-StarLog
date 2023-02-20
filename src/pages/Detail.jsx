@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Header from '../components/common/Header'
 import Btn from '../components/common/Button';
 import api from "../axios/api"
@@ -16,31 +16,33 @@ function Detail() {
 
 
 
-
-
+    const params = useParams();
+    // const foundData = data.find((item) => {
+    //     console.log('item.id : ', item.id); // type: int
+    //     console.log('params.id : ', params.id); // type: string
+    //     return String(item.id) === params.id;
+    //   });
+    
+    //   console.log(foundData);
 
 
 
     // Todo에서 상세보기를 누르면 그거에 객체를 보내준다 
-    const { state } = useLocation();
+    // const { state } = useLocation();
     // console.log(state)
 
 
 
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();
-
-
-
-
     const moveToHome = () => navigate('/');
 
 
     return (
         <DeatailPageSize>
-            <Sidebar state={state} />
+            {/* <Sidebar state={state} /> */}
             <Header />
-            <DetailpageArea>
+            {/* <DetailpageArea>
                 <img src={state.item.imageFile}>
                 </img>
 
@@ -49,10 +51,10 @@ function Detail() {
 
 
                 <DeatilPageText>
-                    {/* <h3>{state.item.id} 번호 </h3> */}
+                  
                     <h3>작성자 : {state.item.user}  </h3>
                     <h4>Title:  {state.item.title} 제목 </h4>
-                    {/* <h3>{state.item.title} 제목 </h3> */}
+                  
 
 
 
@@ -69,10 +71,12 @@ function Detail() {
                         <p>23.02.19</p>
                     </DetailPageWarp>
                 </DeatilPageText>
-            </DetailpageArea>
+            </DetailpageArea> */}
+
             {/* {
                 state === null ? console.log('준비중인페이지입니다') : <PageSize></PageSize>
             } */}
+
             <div style={{
                 display: 'flex',
             }}>

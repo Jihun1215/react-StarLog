@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/common/Header'
 import Btn from '../components/common/Button';
 import api from "../axios/api"
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
+import { __getPosts } from '../redux/modules/getPostsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -13,17 +15,26 @@ import Footer from '../components/common/Footer';
 
 
 function Detail() {
+    const dispatch = useDispatch();
+    // 구조분해할당으로 값을 받아옴
+    const { id } = useParams();
+    console.log(id)
+
+    // 구조분해 할당으로 todoSlice에 값들을 가져온다 
+    const { isLoading, error, postslist } = useSelector(state => {
+        return state.postslist
+    })
+    console.log(postslist)
 
 
-
-    const params = useParams();
-    // const foundData = data.find((item) => {
-    //     console.log('item.id : ', item.id); // type: int
-    //     console.log('params.id : ', params.id); // type: string
-    //     return String(item.id) === params.id;
-    //   });
-    
-    //   console.log(foundData);
+    const foundData = postslist.filter((item) => {
+        if (item.id == id) {
+            return id
+        }
+    })
+    // console.log(foundData[0])
+    const ThisData = foundData[0]
+    // console.log(ThisData)
 
 
 
@@ -40,10 +51,10 @@ function Detail() {
 
     return (
         <DeatailPageSize>
-            {/* <Sidebar state={state} /> */}
+            <Sidebar ThisData={ThisData} />
             <Header />
-            {/* <DetailpageArea>
-                <img src={state.item.imageFile}>
+            <DetailpageArea>
+                <img src={ThisData.imageFile}>
                 </img>
 
 
@@ -51,27 +62,27 @@ function Detail() {
 
 
                 <DeatilPageText>
-                  
-                    <h3>작성자 : {state.item.user}  </h3>
-                    <h4>Title:  {state.item.title} 제목 </h4>
-                  
+
+                    <h3>작성자 : {ThisData.user}  </h3>
+                    <h4>Title:  {ThisData.title} 제목 </h4>
+
 
 
 
                     <DetailPageText2>
 
-                        <p>{state.item.body} 내용</p>
+                        <p>{ThisData.body} 내용</p>
                     </DetailPageText2>
 
 
 
 
                     <DetailPageWarp >
-                        <p> ID:  {state.item.id} 번 게시물 </p>
+                        <p> ID:  {ThisData.id} 번 게시물 </p>
                         <p>23.02.19</p>
                     </DetailPageWarp>
                 </DeatilPageText>
-            </DetailpageArea> */}
+            </DetailpageArea>
 
             {/* {
                 state === null ? console.log('준비중인페이지입니다') : <PageSize></PageSize>

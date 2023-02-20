@@ -16,7 +16,8 @@ import api from '../../axios/api'
 
 
 
-function Sidebar(state) {
+function Sidebar(ThisData) {
+    console.log(ThisData.ThisData)
     // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
@@ -32,7 +33,7 @@ function Sidebar(state) {
 
     // Deatil에서 수정을 위한 State들 
     // 현재있는디테일페이지에 id값을 받아와서 적용
-    const [tagetId, setTagetId] = useState(state.state.item.id);
+    const [tagetId, setTagetId] = useState(ThisData.id);
     // 변경할 내용들을 담을 state 들
     const [tagetTitle, setTagetTitle] = useState('');
     const [tagetBody, setTagetBody] = useState('');

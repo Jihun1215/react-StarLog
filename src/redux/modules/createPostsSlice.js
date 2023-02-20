@@ -11,9 +11,10 @@ const initialState = {
 
 
 // 미들웨어
-export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI) => {
+export const __postPosts = createAsyncThunk('createposts', async (payload, thunkAPI) => {
     try {
-        // payload에 해당하는 posts 찾기
+        api.post('/post')
+        // 데이터를 넣고 리렌더링을 위해 조회함수 넣어여함
         const response = await api.get('/posts');
         console.log('response', response.data)
         return thunkAPI.fulfillWithValue(response.data);
@@ -25,19 +26,19 @@ export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI
 
 
 
-export const getPostsSlice = createSlice({
-    name: 'postslist',
+export const postPostsSlice = createSlice({
+    name: 'createposts',
     initialState,
     reducers: {}, // 미들웨어
     extraReducers: {
         // 강의버전
         // 실행중
-        [__getPosts.pending]: (state, action) => {
+        [__postPosts.pending]: (state, action) => {
             state.isLoading = true;
             state.isError = false;
         },
         // 성공
-        [__getPosts.fulfilled]: (state, action) => {
+        [__postPosts.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.isError = false;
             // 서버로부터 받아온 값을 넣어준다 response.data가 action.payload 들어와서
@@ -45,7 +46,7 @@ export const getPostsSlice = createSlice({
             state.postslist = action.payload;
         },
         // 실패 
-        [__getPosts.rejected]: (state, action) => {
+        [__postPosts.rejected]: (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.error = action.payload;
@@ -53,29 +54,12 @@ export const getPostsSlice = createSlice({
     }
 
 });
-// // 준비전
-// builder.addCase(__getPosts.pending, (state, atcion) => {
-//     state.isLoading = true;
-//     state.isError = false;
-// });
-// builder.addCase(__getPosts.fulfilled, (state, action) => {
-//     state.isLoading = false;
-//     state.isError = false;
-//     state.postslist = action.payload;
-// });
-// // 실패 
-// builder.addCase(__getPosts.rejected, (state, action) => {
-//     state.isLoading = false;
-//     state.isError = true;
-//     state.error = action.payload;
-//         // });
-//     }
-// });
+
 
 
 
 // 액션함수 넣기
-export const { } = getPostsSlice.actions;
+export const { } = postPostsSlice.actions;
 // redux
-export default getPostsSlice.reducer;
+export default postPostsSlice.reducer;
 // export const { addNumber, minusNumber } = counterSlice.actions

@@ -15,8 +15,15 @@
 //   const onClickDeatilPage = () => {
 //     navigate(`/${item.item.id}`, { state: item}
 //     )
-//   }
-
+// //   }
+//     return (
+//         <PostArea>
+//             <WrapImg/>
+//             <WrapH3></WrapH3>
+//             <WarpP></WarpP>
+//             <WarpSpan></WarpSpan>
+//         </PostArea>
+//     )
 
   
 // }

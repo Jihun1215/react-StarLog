@@ -13,21 +13,30 @@ import { useNavigate } from 'react-router-dom';
 
 // 기존값 데이터를 불러와서 여기서 타이터 바인딩 
 function List() {
+
     const dispatch = useDispatch();
-    const [posts, setPosts] = useState(null);
-    // // console.log("List", posts)
 
-    // // // 첫 로딩될 때 리스트 가져오기 & display 바뀔때
-    const { isLoading, error, postslist } = useSelector((state) => {
-        return state.postslist;
-    });
+
+    // 구조분해 할당으로 todoSlice에 값들을 가져온다 
+    const { isLoading, error, postslist } = useSelector(state => {
+        return state.postslist
+    })
+
+    // 상세페이지 만들기 위해 
+    const navigate = useNavigate();
+    // usenavigate를 이용해서 item:id로 이동하고 
+    // 이동하면서 item 값을 같이 보냄
+    const onClickDeatilPage = (id) => {
+        navigate(`/${id}`
+        )
+    }
     console.log(postslist)
-
+    // 컴포넌트가 마운트 될 때만 이 함수를 호출할수 있게 
     useEffect(() => {
-        dispatch(__getPosts());
-    }, [dispatch]);
+        dispatch(__getPosts())
+    }, [])
 
-    // // // 상세 버튼 클릭시
+    // todoSlice의 현재상태에 따라 보여줄것들 
     if (isLoading) {
         return <div>로딩 중...</div>;
     }
@@ -36,15 +45,6 @@ function List() {
     }
 
 
-    // 상세페이지 만들기 위해 
-    // const navigate = useNavigate();
-
-    // // usenavigate를 이용해서 item:id로 이동하고 
-    // // 이동하면서 item 값을 같이 보냄
-    // const onClickDeatilPage = (id) => {
-    //     navigate(`/${id}`
-    //     )
-    // }
 
 
 
@@ -67,12 +67,16 @@ function List() {
     return (
         <ListArea>
             {
-                posts?.map((item) => {
+                // React 는 렌더링이 화면에 커밋 된 후에야 모든 효과를 실행하기 때문이다.
+                // 즉 React는 return에서 postslist.map(...)을 반복실행할 때 첫 턴에 데이터가 
+                // 아직 안들어와도 렌더링이 실행되며 당연히 그 데이터는 undefined로 정의되어 오류가 나는 것이다.
+                postslist && postslist.map((item) => {
                     return (
                         // onClick={onClickDeatilPage}
                         // onClick={(() => { onClickDeatilPage(item.id) })}
                         <PostArea
                             key={item.id}
+                            onClick={(() => { onClickDeatilPage(item.id) })}
                         >
                             <div><WrapImg src={item.imageFile} /></div>
 

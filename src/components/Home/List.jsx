@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import Posts from './Posts'
 import { useDispatch, useSelector } from 'react-redux';
-import { __getPosts } from '../../redux/modules/getPostsSlice';
-import api from "../../axios/api"
+import { __getPosts } from '../../redux/modules/PostsSlice';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -19,8 +18,10 @@ function List() {
 
     // 구조분해 할당으로 todoSlice에 값들을 가져온다 
     const { isLoading, error, postslist } = useSelector(state => {
-        return state.postslist
+        // store에 있는 리듀서 함수명으로 해야 불러올수 있다
+        return state.Posts
     })
+
 
     // 상세페이지 만들기 위해 
     const navigate = useNavigate();
@@ -44,7 +45,13 @@ function List() {
         return <div>{error.message}</div>;
     }
 
-
+    // 2가지 방법 
+    // db 저장 
+    // 1. 리덕스로 db axios 성공이면 useEffec 에서 따라 해야됨 get 요청
+    // 2. 리듀서 store에 추가 
+    // 문제점 
+    // 1. 문제점 리스트에 Item이 크면 성능화 이슈 깜빡임 이슈 useEffect 잘 활용해야 된다
+    // 2. 
 
 
 

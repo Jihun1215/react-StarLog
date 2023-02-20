@@ -2,32 +2,20 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Btn from './common/Button';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 // 아이콘 불러오기 
 import { BiPlus } from "react-icons/bi"
 import api from '../axios/api'
-
-
-
-
+import { __getPosts } from '../redux/modules/PostsSlice';
 
 
 
 function Sidebar() {
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
-    const [open2, setOpen2] = useState('none');
-
-    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : setOpen2('block'));
-
-    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : setOpen2('none'));
-
-    const onClicktest = () => {
-        alert('작업중..')
-    }
-
-    // Form 최종값 
-    const [posts, setPosts] = useState(null)
-    // img useState 
+    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : alert("Error"));
+    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : alert("Error"));
+    // 이미지 state 
     const [imageFile, setImageFile] = useState({
         imageFile: "",
         viewUrl: "",
@@ -38,37 +26,55 @@ function Sidebar() {
     const [body, setBody] = useState('');
     const [user, setUser] = useState('');
 
+    const onClicktest = () => {
+        alert('작업중..')
+    }
+
+    const dispatch = useDispatch()
+
+    // Form 최종값 
+    const [posts, setPosts] = useState(null)
+    // img useState 
+
+
+
     // axios로 저장하기 위해 만든 객체 
     const all = {
         title,
         body,
-        imageFile: imageFile.viewUrl,
+        viewUrl: imageFile.viewUrl,
         user,
     }
 
     const navigate = useNavigate()
-    // const gotoHomepage = () => {
-    //     navigate('/')
-    // }
+    const gotoHomepage = () => {
+        navigate('/')
+    }
 
-    // 조회 함수
-    const fetchPosts = async () => {
-        // const { data } = await axios.get("http://localhost:4001/todos");
-        const { data } = await api.get('/posts')
-        setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-    };
+    // // 조회 함수
+    // const fetchPosts = async () => {
+    //     // const { data } = await axios.get("http://localhost:4001/todos");
+    //     const { data } = await api.get('/posts')
+    //     setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+    // };
 
-    // console.log('Posts', posts)
+    // // console.log('Posts', posts)
 
-    // 추가 함수 
-    const onSubmitHandler = async () => {
-        api.post('/posts', all)
-        setPosts([...posts, all])
-        // 리-렌더링을 위해 조회함수 불러옴 
-        fetchPosts();
+    // // 추가 함수 
+    const onSubmitHandler = () => {
+        // dispatch(__postPosts(all))
+        // dispatch(__getPosts())
+        // api.post('/posts', all)
+        // setPosts([...posts, all])
+        // modal 닫기
+        setOpen('none')
 
     }
 
+
+    const onChangeTitleHandler = (e) => {
+        setTitle(e.target.value)
+    }
     const onChangeBodyHandler = (e) => {
         setBody(e.target.value)
     }
@@ -85,13 +91,14 @@ function Sidebar() {
         setTitle('');
         setBody('');
         // 이걸 바꿔야하는데 어떻게 하면 바꿀수 있을지 생각해보자! 
-        window.location.reload()
-
+        // window.location.reload()
+        gotoHomepage();
     }
+
     // 조회함수가 렌더링이 되면 리-렌더링이됨 
-    useEffect(() => {
-        fetchPosts();
-    }, []);
+    // useEffect(() => {
+    //     fetchPosts();
+    // }, []);
 
     const [loaded, setLoaded] = useState(false);
 
@@ -135,22 +142,17 @@ function Sidebar() {
                 name={'first'}
                 onClick={OpenModal}
                 sideBtn>
-
-                <BiPlus
-                    onClick={OpenModal}
-                    style={{
-                        fontSize: "1.25rem"
-                    }} />
-
+                +
             </Btn>
 
             <Btn
                 onClick={onClicktest}
-                sideBtn>테스트</Btn>
+                sideBtn>.</Btn>
             {/* 모달 부분 */}
             <Modaloutside isOpen={open}>
                 <ModalInside isOpen={open}>
                     {/* Form  */}
+
                     <SImageUploaderWrapper onSubmit={onSumitFormHandler}>
 
                         <h3>Posting</h3>
@@ -204,9 +206,8 @@ function Sidebar() {
                             <input
                                 type="text"
                                 value={title}
-                                onChange={(e) => {
-                                    setTitle(e.target.value)
-                                }}
+                                onChange={onChangeTitleHandler}
+                                max={10}
                                 required />
 
                             <br /><br />

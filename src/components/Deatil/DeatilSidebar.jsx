@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import Btn from '../common/Button';
 // 아이콘 불러오기 
 import { useNavigate } from 'react-router-dom';
-import { BiHeart } from "react-icons/bi";
-import { BiPlus } from "react-icons/bi"
 import { AiFillDelete } from "react-icons/ai"
 import { AiFillEdit } from "react-icons/ai"
 import api from '../../axios/api'
@@ -17,15 +15,15 @@ import api from '../../axios/api'
 
 
 function Sidebar(ThisData) {
-    console.log(ThisData.ThisData)
+    // console.log(ThisData.ThisData)
     // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
 
 
-    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : console.log('d'));
+    const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);
 
-    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : console.log('d'));
+    const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : null);
 
 
 
@@ -67,7 +65,6 @@ function Sidebar(ThisData) {
 
     // 수정 함수 
     const onUpdateButtonClickHandler = async () => {
-
         api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
         setPosts(posts.map((item) => {
             // targetID string item.id는 number여서 == 로 진행 

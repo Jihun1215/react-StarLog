@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/common/Header'
 import Btn from '../components/common/Button';
-import api from "../axios/api"
+
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
-import { __getPosts } from '../redux/modules/getPostsSlice';
+import { __getPosts } from '../redux/modules/PostsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -32,22 +32,12 @@ function Detail() {
             return id
         }
     })
-    // console.log(foundData[0])
+
     const ThisData = foundData[0]
-    // console.log(ThisData)
-
-
-
-    // Todo에서 상세보기를 누르면 그거에 객체를 보내준다 
-    // const { state } = useLocation();
-    // console.log(state)
-
-
 
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();
     const moveToHome = () => navigate('/');
-
 
     return (
         <DeatailPageSize>

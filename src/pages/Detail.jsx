@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/common/Header'
 import Btn from '../components/common/Button';
-
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
 import { __getPosts } from '../redux/modules/PostsSlice';
@@ -16,13 +15,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Detail() {
     const dispatch = useDispatch();
-    // 구조분해할당으로 값을 받아옴
     const { id } = useParams();
-    console.log(id)
 
     // 구조분해 할당으로 todoSlice에 값들을 가져온다 
     const { isLoading, error, postslist } = useSelector(state => {
-        return state.postslist
+        return state.Posts
     })
     console.log(postslist)
 
@@ -32,7 +29,7 @@ function Detail() {
             return id
         }
     })
-
+    console.log(foundData)
     const ThisData = foundData[0]
 
     // navigate훅을 이용해서 돌아가기 구현 
@@ -74,9 +71,15 @@ function Detail() {
                 </DeatilPageText>
             </DetailpageArea>
 
-            {/* {
-                state === null ? console.log('준비중인페이지입니다') : <PageSize></PageSize>
-            } */}
+
+
+
+
+
+
+
+
+
 
             <div style={{
                 display: 'flex',

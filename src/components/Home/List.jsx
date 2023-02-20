@@ -16,11 +16,12 @@ function List() {
     const dispatch = useDispatch();
 
 
-    // 구조분해 할당으로 todoSlice에 값들을 가져온다 
+    // PostsSlice에 있는 초기값 가져오기 ! 
     const { isLoading, error, postslist } = useSelector(state => {
         // store에 있는 리듀서 함수명으로 해야 불러올수 있다
         return state.Posts
     })
+
 
 
     // 상세페이지 만들기 위해 
@@ -31,7 +32,7 @@ function List() {
         navigate(`/${id}`
         )
     }
-    console.log(postslist)
+  
     // 컴포넌트가 마운트 될 때만 이 함수를 호출할수 있게 
     useEffect(() => {
         dispatch(__getPosts())
@@ -90,7 +91,7 @@ function List() {
                             <div>
                                 <WrapH3>{item.title}</WrapH3>
                                 <WarpP>{item.body} </WarpP>
-                                <WarpSpan>23.02.19</WarpSpan>
+                             
                             </div>
 
                         </PostArea>

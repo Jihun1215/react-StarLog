@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from '../../axios/api'
+import axios from "axios";
 
 // 초기값 설정하기 
 const initialState = {
@@ -9,12 +10,12 @@ const initialState = {
 }
 
 
-// 미들웨어
+// 미들웨어 show 
 export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI) => {
     try {
         // payload에 해당하는 posts 찾기
         const response = await api.get('/posts');
-        console.log('response', response.data)
+        // console.log('response', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
         // 실패할떄 
@@ -24,13 +25,13 @@ export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI
 
 
 
-// 미들웨어
-export const __postPosts = createAsyncThunk('createposts', async (payload, thunkAPI) => {
+// 미들웨어 create 
+export const __postPosts = createAsyncThunk('post/post', async (payload, thunkAPI) => {
     try {
-        api.post('/post', {});
+        api.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl });
         // 데이터를 넣고 리렌더링을 위해 조회함수 넣어여함
         const response = await api.get('/posts');
-        console.log('response', response.data)
+        console.log('제발작성성공좀해주세요', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
         // 실패할떄 
@@ -39,7 +40,16 @@ export const __postPosts = createAsyncThunk('createposts', async (payload, thunk
 })
 
 
-
+export const __deletePost = createAsyncThunk('deletpost', async (payload, thunkAPI) => {
+    try {
+        await api.delete(`/posts/${payload}`)
+        const response = await api.get('/posts');
+        console.log('제발삭제성공좀해주세요', response.data)
+        return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+    }
+});
 
 
 
@@ -86,7 +96,29 @@ export const PostsSlice = createSlice({
             state.postslist = action.payload;
         },
         // 실패 
-        [__postPosts.rejected]: (state, action) => {
+        [__deletePost.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.error = action.payload;
+        },
+
+        // __deletePosts
+        // __postPosts
+        // 실행중
+        [__deletePost.pending]: (state, action) => {
+            state.isLoading = true;
+            state.isError = false;
+        },
+        // 성공
+        [__deletePost.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            // 서버로부터 받아온 값을 넣어준다 response.data가 action.payload 들어와서
+            // state.todos로 넣어준다 
+            state.postslist = action.payload;
+        },
+        // 실패 
+        [__deletePost.rejected]: (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.error = action.payload;

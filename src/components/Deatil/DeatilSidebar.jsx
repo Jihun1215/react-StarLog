@@ -5,7 +5,8 @@ import Btn from '../common/Button';
 import { useNavigate } from 'react-router-dom';
 import { AiFillDelete } from "react-icons/ai"
 import { AiFillEdit } from "react-icons/ai"
-import api from '../../axios/api'
+import { useDispatch } from 'react-redux';
+import { __deletePost, __getPosts } from '../../redux/modules/PostsSlice';
 
 
 
@@ -19,11 +20,9 @@ function Sidebar(ThisData) {
     // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
-
-
     const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);
-
     const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : null);
+    const dispatch = useDispatch();
 
 
 
@@ -37,48 +36,39 @@ function Sidebar(ThisData) {
     const [tagetBody, setTagetBody] = useState('');
 
 
-
+    
 
     const navigate = useNavigate()
-    // 조회 함수
-    const fetchPosts = async () => {
-        // const { data } = await axios.get("http://localhost:4001/todos");
-        const { data } = await api.get('/posts')
-        setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-    };
 
-    useEffect(() => {
-        fetchPosts();
-    }, []);
 
-    // 삭제 함수 
-    // 삭제를 해야 하니 인자 값으로 어떤걸 삭제 해야 되는지를 알려줘야 한다 
+    // 삭제 
     const onDeleteButtonClickHandler = async (id) => {
-        // axios.delete(`http://localhost:4001/todos/${id}`);
-        api.delete(`/posts/${id}`)
-        // 삭제되고 렌더링을 시키려면 어떻게 접근 해야 할까 ? 
-        setPosts(posts.filter((item) => {
-            return item.id !== id
-        }))
+        dispatch(__deletePost(id))
+        // // axios.delete(`http://localhost:4001/todos/${id}`);
+        // api.delete(`/posts/${id}`)
+        // // 삭제되고 렌더링을 시키려면 어떻게 접근 해야 할까 ? 
+        // setPosts(posts.filter((item) => {
+        //     return item.id !== id
+        // }))
         navigate('/')
     }
 
-    // 수정 함수 
-    const onUpdateButtonClickHandler = async () => {
-        api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
-        setPosts(posts.map((item) => {
-            // targetID string item.id는 number여서 == 로 진행 
-            // console.log(typeof targetID)
-            // console.log(typeof item.id)
-            if (item.id == tagetId) return { ...item, title: tagetTitle, body: tagetBody }
-            else return item
-        }))
-    }
+    // // 수정 함수 
+    // const onUpdateButtonClickHandler = async () => {
+    //     api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
+    //     setPosts(posts.map((item) => {
+    //         // targetID string item.id는 number여서 == 로 진행 
+    //         // console.log(typeof targetID)
+    //         // console.log(typeof item.id)
+    //         if (item.id == tagetId) return { ...item, title: tagetTitle, body: tagetBody }
+    //         else return item
+    //     }))
+    // }
 
     const onSubmitChangePosts = (e) => {
         e.preventDefault();
         alert('수정완료!')
-        onUpdateButtonClickHandler();
+        // onUpdateButtonClickHandler();
         window.location.reload()
     }
 
@@ -134,9 +124,9 @@ function Sidebar(ThisData) {
                                 placeholder="수정할내용넣어" />
                         </div>
                         <main style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Btn
+                            {/* <Btn
                                 detailformbtn
-                                onClick={onUpdateButtonClickHandler}>수정하기</Btn>
+                                onClick={onUpdateButtonClickHandler}>수정하기</Btn> */}
                         </main>
                     </ModalInputBox>
 

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { BiPlus } from "react-icons/bi"
 import api from '../axios/api'
 import { __getPosts } from '../redux/modules/PostsSlice';
-
+import { __postPosts } from '../redux/modules/PostsSlice';
 
 
 function Sidebar() {
@@ -20,8 +20,7 @@ function Sidebar() {
         imageFile: "",
         viewUrl: "",
     });
-    // title 입력값을 위해서 
-    // body  입력값을 위해서 
+
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [user, setUser] = useState('');
@@ -32,43 +31,21 @@ function Sidebar() {
 
     const dispatch = useDispatch()
 
-    // Form 최종값 
-    const [posts, setPosts] = useState(null)
-    // img useState 
+
 
 
 
     // axios로 저장하기 위해 만든 객체 
-    const all = {
-        title,
-        body,
+    const total = {
+        title: title,
+        body: body,
+        user: user,
         viewUrl: imageFile.viewUrl,
-        user,
     }
 
     const navigate = useNavigate()
     const gotoHomepage = () => {
         navigate('/')
-    }
-
-    // // 조회 함수
-    // const fetchPosts = async () => {
-    //     // const { data } = await axios.get("http://localhost:4001/todos");
-    //     const { data } = await api.get('/posts')
-    //     setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-    // };
-
-    // // console.log('Posts', posts)
-
-    // // 추가 함수 
-    const onSubmitHandler = () => {
-        // dispatch(__postPosts(all))
-        // dispatch(__getPosts())
-        // api.post('/posts', all)
-        // setPosts([...posts, all])
-        // modal 닫기
-        setOpen('none')
-
     }
 
 
@@ -82,17 +59,24 @@ function Sidebar() {
         setUser(e.target.value)
     }
 
+
+
+
+
     // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
-    const onSumitFormHandler = (e) => {
+    const onSumitFormHandler = async (e) => {
         e.preventDefault()
-        onSubmitHandler()
-        alert('저장완료! ')
+        await dispatch(__postPosts(total))
+        dispatch(__getPosts())
+
+
         setImageFile('');
         setTitle('');
         setBody('');
-        // 이걸 바꿔야하는데 어떻게 하면 바꿀수 있을지 생각해보자! 
-        // window.location.reload()
-        gotoHomepage();
+        setUser('');
+
+        setOpen('none')
+
     }
 
     // 조회함수가 렌더링이 되면 리-렌더링이됨 
@@ -221,7 +205,7 @@ function Sidebar() {
                                 required />
                             <br /><br />
 
-                            <label>usery</label>
+                            <label>user</label>
                             <input
                                 type="text"
                                 value={user}

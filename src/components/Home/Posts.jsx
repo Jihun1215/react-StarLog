@@ -13,9 +13,8 @@ function Posts(item) {
   // usenavigate를 이용해서 item:id로 이동하고 
   // 이동하면서 item 값을 같이 보냄
   const onClickDeatilPage = () => {
-    navigate(`/${item.item.id}`, {
-      state: item
-    })
+    navigate(`/${item.item.id}`, { state: item}
+    )
   }
 
 

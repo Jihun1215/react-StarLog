@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import { useNavigate, useLocation } from 'react-router-dom';
-import Header from '../components/Header'
-import Btn from '../components/Button';
+import Header from '../components/common/Header'
+import Btn from '../components/common/Button';
 import api from "../axios/api"
 import Sidebar from "../components/Deatil/DeatilSidebar"
+import Footer from '../components/common/Footer';
 
 
 
@@ -12,6 +13,14 @@ import Sidebar from "../components/Deatil/DeatilSidebar"
 
 
 function Detail() {
+
+
+
+
+
+
+
+
     // Todo에서 상세보기를 누르면 그거에 객체를 보내준다 
     const { state } = useLocation();
     // console.log(state)
@@ -82,6 +91,7 @@ function Detail() {
                 detaildetail>
                 삭제하기
             </Btn> */}
+            <Footer detail />
         </DeatailPageSize >
     )
 }

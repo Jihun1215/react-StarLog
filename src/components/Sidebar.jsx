@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Btn from './Button';
+import Btn from './common/Button';
 import { useNavigate } from "react-router-dom";
 // 아이콘 불러오기 
 import { BiPlus } from "react-icons/bi"

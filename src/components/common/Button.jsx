@@ -99,6 +99,14 @@ const DefailtButton = styled.button`
     margin: 0 auto;
     background: #ee8683;
   `};
+  ${(props) =>
+    props.modalInBtn &&
+    css`
+    margin: 0 auto;
+    width : 12.5rem;
+    height: 2.5rem;
+    background: #;
+  `};
 
 
 

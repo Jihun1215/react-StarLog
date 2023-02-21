@@ -46,7 +46,7 @@ function Sidebar(ThisData) {
 
     // 삭제 
     const onDeleteButtonClickHandler = async (id) => {
-        const isTrue = window.confirm('삭제하시겠습니까 ?');
+        const isTrue = window.confirm(`${ThisData.ThisData.id}번 게시물을 삭제하시겠습니까 ?`);
         if (isTrue === true) {
             dispatch(__deletePosts(id));
             navigate('/');
@@ -73,7 +73,8 @@ function Sidebar(ThisData) {
                 <AiFillEdit
                     onClick={OpenModal}
                     style={{
-                        fontSize: "1.25rem"
+                        fontSize: "1.25rem",
+                        background: "#fff"
                     }} />
 
             </Btn>
@@ -82,7 +83,7 @@ function Sidebar(ThisData) {
                 onClick={(() => {
                     onDeleteButtonClickHandler(ThisData.ThisData.id)
                 })}
-                sideBtn><AiFillDelete style={{ fontSize: "1.25rem" }} /></Btn>
+                sideBtn><AiFillDelete style={{ fontSize: "1.25rem", background: "#fff" }} /></Btn>
 
             {/* 모달 부분 */}
             <Modaloutside isOpen={open}>
@@ -124,7 +125,7 @@ function Sidebar(ThisData) {
 
 
                     <div style={{
-                        margin: "1.5625rem 0", display: "flex", alignItems: "center", justifyContent: "center"
+                        margin: "1.5625rem 0", display: "flex", alignItems: "center", justifyContent: "center", background: "#495057", borderRadius: "1.25rem"
                     }}>
                         <Btn
                             modalInBtn
@@ -186,6 +187,7 @@ const ModalInside = styled.div`
      height: 31.25rem;
      background: #495057;
      > h3 {
+        background: #495057;
         color: #fff;
         text-align: center;
         font-weight: 600;
@@ -222,6 +224,7 @@ const ModalFormBtnBox = styled.div`
 const ModalInputName = styled.label`
     color: #fff;
     padding: .625rem;
+    
 `;
 const ModalFormInput = styled.input`
     width: 15.625rem;

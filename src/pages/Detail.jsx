@@ -47,8 +47,8 @@ function Detail() {
                 </PostsAreaDiv1>
 
                 <PostsAreaDiv2>
-                    <h2>Title:  {ThisData.title} </h2>
-                    <h3>body:  {ThisData.body} </h3>
+                    <h2> {ThisData.title} </h2>
+                    <h3> {ThisData.body} </h3>
                     <p>{ThisData.user} 님 ! </p>
                 </PostsAreaDiv2>
 

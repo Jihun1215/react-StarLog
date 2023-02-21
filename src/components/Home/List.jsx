@@ -56,19 +56,6 @@ function List() {
 
 
 
-    // // 조회 함수
-    // const fetchPosts = async () => {
-    //     // const { data } = await axios.get("http://localhost:4001/todos");
-    //     const { data } = await api.get('/posts')
-    //     setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-    // };
-    // console.log(posts)
-
-    // // 생성한 함수를 컴포넌트가 mount 됐을 떄 실행하기 위해 useEffect를 사용합니다.
-    // useEffect(() => {
-    //     // effect 구문에 생성한 함수를 넣어 실행합니다.
-    //     fetchPosts();
-    // }, []);
 
 
 

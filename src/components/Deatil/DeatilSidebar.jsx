@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Btn from '../common/Button';
 // 아이콘 불러오기 
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillDelete } from "react-icons/ai"
 import { AiFillEdit } from "react-icons/ai"
 import { useDispatch } from 'react-redux';
-import { __deletePost, __getPosts } from '../../redux/modules/PostsSlice';
+import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/PostsSlice';
 
 
 
@@ -16,8 +16,8 @@ import { __deletePost, __getPosts } from '../../redux/modules/PostsSlice';
 
 
 function Sidebar(ThisData) {
+
     console.log(ThisData.ThisData.id)
-    // console.log(state.state.item.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
     const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);
@@ -26,17 +26,20 @@ function Sidebar(ThisData) {
 
 
 
-    const [posts, setPosts] = useState(null);
+    // const [posts, setPosts] = useState(null);
 
     // Deatil에서 수정을 위한 State들 
     // 현재있는디테일페이지에 id값을 받아와서 적용
-    const [tagetId, setTagetId] = useState(ThisData.id);
     // 변경할 내용들을 담을 state 들
+
     const [tagetTitle, setTagetTitle] = useState('');
     const [tagetBody, setTagetBody] = useState('');
-
-
-
+    const ChangeInputObj = {
+        title: tagetTitle,
+        body: tagetBody,
+        id: ThisData.ThisData.id,
+    }
+    console.log(ChangeInputObj)
 
     const navigate = useNavigate()
 
@@ -45,37 +48,18 @@ function Sidebar(ThisData) {
     const onDeleteButtonClickHandler = async (id) => {
         const isTrue = window.confirm('삭제하시겠습니까 ?');
         if (isTrue === true) {
-            dispatch(__deletePost(id));
+            dispatch(__deletePosts(id));
             navigate('/');
         }
-
-
-        // // axios.delete(`http://localhost:4001/todos/${id}`);
-        // api.delete(`/posts/${id}`)
-        // // 삭제되고 렌더링을 시키려면 어떻게 접근 해야 할까 ? 
-        // setPosts(posts.filter((item) => {
-        //     return item.id !== id
-        // }))
-
     }
 
-    // // 수정 함수 
-    // const onUpdateButtonClickHandler = async () => {
-    //     api.patch(`posts/${tagetId}`, { title: tagetTitle, body: tagetBody })
-    //     setPosts(posts.map((item) => {
-    //         // targetID string item.id는 number여서 == 로 진행 
-    //         // console.log(typeof targetID)
-    //         // console.log(typeof item.id)
-    //         if (item.id == tagetId) return { ...item, title: tagetTitle, body: tagetBody }
-    //         else return item
-    //     }))
-    // }
-
-    const onSubmitChangePosts = (e) => {
+    const onSubmitUpdatePosts = async (e) => {
         e.preventDefault();
-        alert('수정완료!')
-        // onUpdateButtonClickHandler();
-        window.location.reload()
+        dispatch(__patchPosts(ChangeInputObj));
+        setOpen('none');
+        setTagetTitle('');
+        setTagetBody('');
+
     }
 
 
@@ -105,7 +89,7 @@ function Sidebar(ThisData) {
                 <ModalInside isOpen={open}>
                     <h3>Posts 수정하기</h3>
 
-                    <ModalInputBox onSubmit={onSubmitChangePosts}>
+                    <ModalInputBox onSubmit={onSubmitUpdatePosts}>
                         <div>
                             <ModalInputName>제목수정</ModalInputName>
                             <ModalFormInput
@@ -130,9 +114,11 @@ function Sidebar(ThisData) {
                                 placeholder="수정할내용넣어" />
                         </div>
                         <main style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            {/* <Btn
+                            <Btn
+                                type="submit"
                                 detailformbtn
-                                onClick={onUpdateButtonClickHandler}>수정하기</Btn> */}
+                            // onClick={onUpdateButtonClickHandler}
+                            >수정하기</Btn>
                         </main>
                     </ModalInputBox>
 

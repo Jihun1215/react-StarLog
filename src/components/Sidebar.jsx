@@ -35,7 +35,7 @@ function Sidebar() {
 
 
 
-    // axios로 저장하기 위해 만든 객체 
+    // 리덕스로 전달하기 위해 만든 Input 값들을 객체로 만듬 
     const total = {
         title: title,
         body: body,

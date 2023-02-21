@@ -6,7 +6,7 @@ import Btn from '../components/common/Button';
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
 import { __getPosts } from '../redux/modules/PostsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
 
 
@@ -14,14 +14,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function Detail() {
-    const dispatch = useDispatch();
-    const { id } = useParams();
 
+    const { id } = useParams();
     // 구조분해 할당으로 todoSlice에 값들을 가져온다 
     const { isLoading, error, postslist } = useSelector(state => {
         return state.Posts
     })
-    console.log(postslist)
+   
 
 
     const foundData = postslist.filter((item) => {
@@ -29,15 +28,15 @@ function Detail() {
             return id
         }
     })
-    console.log(foundData)
-    const ThisData = foundData[0]
 
+    const ThisData = foundData[0]
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();
     const moveToHome = () => navigate('/');
 
     return (
         <DeatailPageSize>
+            {/* porps로 데이터 보내주기 */}
             <Sidebar ThisData={ThisData} />
             <Header />
             <DetailpageArea>
@@ -87,18 +86,6 @@ function Detail() {
                 <Btn onClick={moveToHome}
                     gobackhome>되돌아가기</Btn></div>
 
-
-
-
-            {/* 
-            <Btn onClick={(() => {
-                onDeleteButtonClickHandler(state.item.id)
-                navigate('/')
-            })}
-
-                detaildetail>
-                삭제하기
-            </Btn> */}
             <Footer detail />
         </DeatailPageSize >
     )

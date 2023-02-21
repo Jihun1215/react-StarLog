@@ -10,7 +10,7 @@ const initialState = {
 }
 
 
-// 미들웨어 show 
+// Get
 export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI) => {
     try {
         // payload에 해당하는 posts 찾기
@@ -25,8 +25,8 @@ export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI
 
 
 
-// 미들웨어 create 
-export const __postPosts = createAsyncThunk('post/post', async (payload, thunkAPI) => {
+// Post
+export const __postPosts = createAsyncThunk('post/Posts', async (payload, thunkAPI) => {
     try {
         api.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl });
         // 데이터를 넣고 리렌더링을 위해 조회함수 넣어여함
@@ -39,8 +39,8 @@ export const __postPosts = createAsyncThunk('post/post', async (payload, thunkAP
     }
 })
 
-
-export const __deletePost = createAsyncThunk('deletpost', async (payload, thunkAPI) => {
+// Delete 
+export const __deletePosts = createAsyncThunk('delete/Posts', async (payload, thunkAPI) => {
     try {
         await api.delete(`/posts/${payload}`)
         const response = await api.get('/posts');
@@ -51,6 +51,19 @@ export const __deletePost = createAsyncThunk('deletpost', async (payload, thunkA
     }
 });
 
+// patch
+export const __patchPosts = createAsyncThunk('pathc/Posts', async (payload, thunkAPI) => {
+    try {
+        await api.patch(`/posts/${payload.id}`, { title: payload.title, body: payload.body, })
+        const response = await api.get('/posts');
+        console.log('제발수정성공좀해주세요', response.data)
+        return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+    }
+});
+
+
 
 
 
@@ -59,7 +72,7 @@ export const PostsSlice = createSlice({
     initialState,
     reducers: {}, // 미들웨어
     extraReducers: {
-
+        // --------------- 조회 --------------------------
         // 실행중
         [__getPosts.pending]: (state, action) => {
             state.isLoading = true;
@@ -81,6 +94,7 @@ export const PostsSlice = createSlice({
             state.error = action.payload;
         },
 
+        // --------------- 만들기 --------------------------
         // __postPosts
         // 실행중
         [__postPosts.pending]: (state, action) => {
@@ -96,20 +110,21 @@ export const PostsSlice = createSlice({
             state.postslist = action.payload;
         },
         // 실패 
-        [__deletePost.rejected]: (state, action) => {
+        [__deletePosts.rejected]: (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.error = action.payload;
         },
 
+        // --------------- 삭제 --------------------------
         // __deletePosts
         // 실행중
-        [__deletePost.pending]: (state, action) => {
+        [__deletePosts.pending]: (state, action) => {
             state.isLoading = true;
             state.isError = false;
         },
         // 성공
-        [__deletePost.fulfilled]: (state, action) => {
+        [__deletePosts.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.isError = false;
             // 서버로부터 받아온 값을 넣어준다 response.data가 action.payload 들어와서
@@ -117,7 +132,29 @@ export const PostsSlice = createSlice({
             state.postslist = action.payload;
         },
         // 실패 
-        [__deletePost.rejected]: (state, action) => {
+        [__deletePosts.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.error = action.payload;
+        },
+
+        // --------------- 수정 --------------------------
+        // __patchPosts
+        // 실행중
+        [__patchPosts.pending]: (state, action) => {
+            state.isLoading = true;
+            state.isError = false;
+        },
+        // 성공
+        [__patchPosts.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            // 서버로부터 받아온 값을 넣어준다 response.data가 action.payload 들어와서
+            // state.todos로 넣어준다 
+            state.postslist = action.payload;
+        },
+        // 실패 
+        [__patchPosts.rejected]: (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.error = action.payload;

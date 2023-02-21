@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 // 아이콘 불러오기 
 import { BiPlus } from "react-icons/bi"
-import api from '../axios/api'
+import useInput from '../Hook/useInput';
 import { __getPosts } from '../redux/modules/PostsSlice';
 import { __postPosts } from '../redux/modules/PostsSlice';
 
@@ -21,9 +21,10 @@ function Sidebar() {
         viewUrl: "",
     });
 
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [user, setUser] = useState('');
+    const [title, onChangeTitleHandler, reset] = useInput();
+    const [body, onChangeBodyHandler] = useInput();
+    const [user, onChangeUserHandler] = useInput();
+
 
     const onClicktest = () => {
         alert('작업중..')
@@ -49,15 +50,7 @@ function Sidebar() {
     }
 
 
-    const onChangeTitleHandler = (e) => {
-        setTitle(e.target.value)
-    }
-    const onChangeBodyHandler = (e) => {
-        setBody(e.target.value)
-    }
-    const onChangeUserHandler = (e) => {
-        setUser(e.target.value)
-    }
+
 
 
 
@@ -69,9 +62,9 @@ function Sidebar() {
         await dispatch(__postPosts(total))
         dispatch(__getPosts())
         setImageFile('');
-        setTitle('');
-        setBody('');
-        setUser('');
+        // setTitle('');
+        // setBody('');
+        // setUser('');
 
         setOpen('none')
 
@@ -350,18 +343,22 @@ const SCustomInput = styled.input`
 const SImageWrapper = styled.div`
     width: 100%;
     margin: 0 auto;
+   
+    
 `;
 
 // 이미지 표시하기 
 const SImageArea = styled.img`
      width: 100%;
     height: 12.5rem;
-   text-align: center;
+    text-align: center;
+    border-radius: 1.25rem;
+    border: 2px solid black;
     
 `;
 
 const SLoading = styled.div`
-      width: 100%;
+    width: 100%;
     height: 12.5rem;
     background : #868E96;
     display: flex;
@@ -370,6 +367,7 @@ const SLoading = styled.div`
     color: #fff;
     font-size: 1.2rem;
     margin: 0 auto;
+    border-radius: 1.25rem;
 `;
 
 const InputBoxArea = styled.div`

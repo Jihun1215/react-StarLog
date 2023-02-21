@@ -206,7 +206,6 @@ const ModalInputBox = styled.form`
     height: 20.3125rem;
     border: 1px solid black;
     padding: .625rem;
-
     > div {
         margin: .625rem auto;
         width: 21.875rem;

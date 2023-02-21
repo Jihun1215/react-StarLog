@@ -56,9 +56,7 @@ function Detail() {
 
 
 
-            <div style={{
-                display: 'flex',
-            }}>
+            <div style={{display: 'flex',}}>
                 <Btn onClick={moveToHome}
                     gobackhome>되돌아가기</Btn></div>
 

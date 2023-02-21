@@ -54,10 +54,10 @@ function Sidebar() {
 
 
     // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
-    const onSumitFormHandler = async (e) => {
+    const onSumitFormHandler = (e) => {
         e.preventDefault()
         // 값 보내고
-        await dispatch(__postPosts(total))
+        dispatch(__postPosts(total))
         // 다시 조회하기 
         dispatch(__getPosts())
         // 파일 초기화 
@@ -128,7 +128,6 @@ function Sidebar() {
 
                         <h3>Posting</h3>
 
-
                         {/* 이미지 */}
                         <SImageWrapper>
                             {
@@ -178,7 +177,6 @@ function Sidebar() {
                                 type="text"
                                 value={title}
                                 onChange={onChangeTitleHandler}
-                                max={10}
                                 required />
 
                             <br /><br />
@@ -220,15 +218,9 @@ function Sidebar() {
 
                             </div>
 
-
-
                         </InputBoxArea>
 
-
                     </SImageUploaderWrapper >
-
-
-
 
 
                 </ModalInside>

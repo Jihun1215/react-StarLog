@@ -10,9 +10,9 @@ function Login() {
 
                 <LoginAreaInputBox></LoginAreaInputBox>
 
-                <LoginAreaButton></LoginAreaButton>
+                <LoginAreaButton>버튼있고 로그인하기 </LoginAreaButton>
 
-                <LoginAreaGoToSignUP></LoginAreaGoToSignUP>
+                <LoginAreaGoToSignUP>회원가입하러 가기</LoginAreaGoToSignUP>
             </LoginArea>
 
         </LoginLayout>

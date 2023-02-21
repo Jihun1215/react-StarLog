@@ -44,7 +44,7 @@ function Detail() {
 
                 <DeatailPageSize>
                     {/* porps로 데이터 보내주기 */}
-                    {/* < Sidebar foundData={foundData} /> */}
+                    < Sidebar foundData={foundData} />
                     <Header />
 
                     <PostsArea>

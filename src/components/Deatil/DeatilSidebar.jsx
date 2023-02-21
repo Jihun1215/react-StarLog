@@ -11,22 +11,13 @@ import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/Pos
 
 
 
+function Sidebar(foundData) {
+    console.log(foundData)
 
-
-
-
-
-
-function Sidebar(ThisData) {
-
-    // console.log(ThisData.ThisData.id)
-    // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
     const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);
     const closeModal = (e) => (e.target.name === 'first' ? setOpen('none') : null);
     const dispatch = useDispatch();
-
-
 
     // const [posts, setPosts] = useState(null);
 
@@ -34,7 +25,7 @@ function Sidebar(ThisData) {
     // 현재있는디테일페이지에 id값을 받아와서 적용
     // 변경할 내용들을 담을 state 들
     const [tagetTitle, onChangeTitleHandler, setTagetTitle] = useInput();
-    const [tagetBody, onChangeBodyHandler, setTagetBody] = useInput('');
+    const [tagetBody, onChangeBodyHandler, setTagetBody] = useInput();
     // const [tagetTitle, setTagetTitle] = useState('');
     // const [tagetBody, setTagetBody] = useState('');
 
@@ -45,7 +36,7 @@ function Sidebar(ThisData) {
     const ChangeInputObj = {
         title: tagetTitle,
         body: tagetBody,
-        id: ThisData.ThisData.id,
+        id: foundData.foundData.id,
     }
     // console.log(ChangeInputObj)
 
@@ -54,7 +45,7 @@ function Sidebar(ThisData) {
 
     // 삭제 
     const onDeleteButtonClickHandler = async (id) => {
-        const isTrue = window.confirm(`${ThisData.ThisData.id}번 게시물을 삭제하시겠습니까 ?`);
+        const isTrue = window.confirm(`${foundData.foundData.id}번 게시물을 삭제하시겠습니까 ?`);
         if (isTrue === true) {
             dispatch(__deletePosts(id));
             navigate('/');
@@ -85,7 +76,7 @@ function Sidebar(ThisData) {
 
             <Btn
                 onClick={(() => {
-                    onDeleteButtonClickHandler(ThisData.ThisData.id)
+                    onDeleteButtonClickHandler(foundData.foundData.id)
                 })}
                 sideBtn><AiFillDelete style={{ fontSize: "1.25rem", background: "#fff" }} /></Btn>
 

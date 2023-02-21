@@ -17,7 +17,7 @@ import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/Pos
 
 function Sidebar(ThisData) {
 
-    console.log(ThisData.ThisData.id)
+    // console.log(ThisData.ThisData.id)
     // 모달창 display 속성 none / block
     const [open, setOpen] = useState('none');
     const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);
@@ -39,7 +39,7 @@ function Sidebar(ThisData) {
         body: tagetBody,
         id: ThisData.ThisData.id,
     }
-    console.log(ChangeInputObj)
+    // console.log(ChangeInputObj)
 
     const navigate = useNavigate()
 

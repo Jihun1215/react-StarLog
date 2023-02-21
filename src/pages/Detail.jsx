@@ -6,7 +6,7 @@ import Btn from '../components/common/Button';
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
 import { __getPosts } from '../redux/modules/PostsSlice';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 
@@ -20,7 +20,7 @@ function Detail() {
     const { isLoading, error, postslist } = useSelector(state => {
         return state.Posts
     })
-   
+
 
 
     const foundData = postslist.filter((item) => {
@@ -39,44 +39,20 @@ function Detail() {
             {/* porps로 데이터 보내주기 */}
             <Sidebar ThisData={ThisData} />
             <Header />
-            <DetailpageArea>
-                <img src={ThisData.imageFile}>
-                </img>
 
+            <PostsArea>
 
+                <PostsAreaDiv1>
+                    <img src={ThisData.imageFile}></img>
+                </PostsAreaDiv1>
 
+                <PostsAreaDiv2>
+                    <h2>Title:  {ThisData.title} </h2>
+                    <h3>body:  {ThisData.body} </h3>
+                    <p>{ThisData.user} 님 ! </p>
+                </PostsAreaDiv2>
 
-
-                <DeatilPageText>
-
-                    <h3>작성자 : {ThisData.user}  </h3>
-                    <h4>Title:  {ThisData.title} 제목 </h4>
-
-
-
-
-                    <DetailPageText2>
-
-                        <p>{ThisData.body} 내용</p>
-                    </DetailPageText2>
-
-
-
-
-                    <DetailPageWarp >
-                        <p> ID:  {ThisData.id} 번 게시물 </p>
-                        <p>23.02.19</p>
-                    </DetailPageWarp>
-                </DeatilPageText>
-            </DetailpageArea>
-
-
-
-
-
-
-
-
+            </PostsArea>
 
 
 
@@ -94,29 +70,97 @@ function Detail() {
 export default Detail
 
 
-
+// 전체 사이즈 
 const DeatailPageSize = styled.div`
     max-width: 80rem;
     height: 52rem;
     margin: 1rem auto;
     background: #393E46;
-    border-radius: 20px;
+
 
 `;
 
-const DetailpageArea = styled.div`
 
+const PostsArea = styled.div`
     width :50rem;
     height: 34.375rem;
-    margin: 3.125rem auto;
+    border: 2px solid black;
+    margin: 6.25rem auto;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+`;
 
+const PostsAreaDiv1 = styled.div`
+    width: 48%;
+    height: 95%;
+    border: 2px solid black;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > img {
+        width: 95%;
+        height: 95%;
+        border: 2px solid black;
+        border-radius: 1.25rem;
+    };
+`;
+
+const PostsAreaDiv2 = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 48%;
+    height: 95%;
+    border: 2px solid black;
+    color: #fff;
+    border-radius: 1.25rem;
+    gap: 1.1875rem 0;
+    
+    > h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid black;
+        width: 80%;
+        height: 3.75rem;
+        border-radius: 1.25rem;
+    };
+    > h3 {
+        padding: 1.5625rem;
+        width: 80%;
+        height: 18.75rem;
+        border: 2px solid black;
+    } ;
+    > p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 3.125rem;
+        border: 2px solid black;
+    }
+`;
+
+
+
+
+const DetailpageArea = styled.div`
+    border: 2px solid black;
+    width : 50rem;
+    height: 34.375rem;
+    margin: 6.25rem auto;
     background: white;
     border-radius: 1.25rem;
-    
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     > img {
-        width :25rem;
+        width : 48%;
         height: 34.375rem;
         border-top-left-radius: 1.25rem;
         border-top-right-radius: 1.25rem;

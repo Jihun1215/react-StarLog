@@ -6,7 +6,7 @@ import Btn from '../components/common/Button';
 import Sidebar from "../components/Deatil/DeatilSidebar"
 import Footer from '../components/common/Footer';
 import { __getPosts } from '../redux/modules/PostsSlice';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -14,54 +14,64 @@ import { useSelector } from 'react-redux';
 
 
 function Detail() {
-
+    const dispatch = useDispatch();
     const { id } = useParams();
     // 구조분해 할당으로 todoSlice에 값들을 가져온다 
-    const { isLoading, error, postslist } = useSelector(state => {
-        return state.Posts
-    })
+    const postslist = useSelector(state => state.Posts.postslist)
 
 
 
-    const foundData = postslist.filter((item) => {
-        if (item.id == id) {
-            return id
-        }
-    })
 
-    const ThisData = foundData[0]
+
+    useEffect(() => {
+        dispatch(__getPosts());
+    }, [dispatch]);
+
+
+    const foundData = postslist.find((item) => item.id === Number(id));
+    console.log(foundData)
+
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();
     const moveToHome = () => navigate('/');
 
     return (
-        <DeatailPageSize>
-            {/* porps로 데이터 보내주기 */}
-            <Sidebar ThisData={ThisData} />
-            <Header />
 
-            <PostsArea>
-
-                <PostsAreaDiv1>
-                    <img src={ThisData.imageFile}></img>
-                </PostsAreaDiv1>
-
-                <PostsAreaDiv2>
-                    <h2> {ThisData.title} </h2>
-                    <h3> {ThisData.body} </h3>
-                    <p>{ThisData.user} 님 ! </p>
-                </PostsAreaDiv2>
-
-            </PostsArea>
+        <>
 
 
+            {postslist.length !== 0 && (
 
-            <div style={{display: 'flex',}}>
-                <Btn onClick={moveToHome}
-                    gobackhome>되돌아가기</Btn></div>
+                <DeatailPageSize>
+                    {/* porps로 데이터 보내주기 */}
+                    {/* < Sidebar foundData={foundData} /> */}
+                    <Header />
 
-            <Footer detail />
-        </DeatailPageSize >
+                    <PostsArea>
+
+                        <PostsAreaDiv1>
+                            <img src={foundData.imageFile}></img>
+                        </PostsAreaDiv1>
+
+                        <PostsAreaDiv2>
+                            <h2> {foundData.title} </h2>
+                            <h3> {foundData.body} </h3>
+                            <p>{foundData.user} 님 ! </p>
+                        </PostsAreaDiv2>
+
+                    </PostsArea>
+
+
+
+                    <div style={{ display: 'flex', }}>
+                        <Btn onClick={moveToHome}
+                            gobackhome>되돌아가기</Btn></div>
+
+                    <Footer detail />
+                </DeatailPageSize >
+            )}
+        </>
+
     )
 }
 

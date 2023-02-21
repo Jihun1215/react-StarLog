@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from '../../axios/api'
-import axios from "axios";
 
 // 초기값 설정하기 
 const initialState = {

@@ -53,10 +53,6 @@ function Sidebar() {
 
 
 
-
-
-
-
     // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
     const onSumitFormHandler = async (e) => {
         e.preventDefault()
@@ -74,10 +70,6 @@ function Sidebar() {
 
     }
 
-    // 조회함수가 렌더링이 되면 리-렌더링이됨 
-    // useEffect(() => {
-    //     fetchPosts();
-    // }, []);
 
     const [loaded, setLoaded] = useState(false);
 

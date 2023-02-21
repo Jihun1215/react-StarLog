@@ -75,7 +75,7 @@ function List() {
                         asdasdasdasdasdasdasdasdasdas
                         asdasdasdasdasdasdsad
                     </p>
-                    <span>음지훈 님! </span>
+                    <span>지훈 님! </span>
                 </PostAreaInDiv2>
             </PostArea1> */}
             {

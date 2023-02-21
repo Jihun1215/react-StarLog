@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import Btn from '../common/Button';
 // 아이콘 불러오기 
 import { useNavigate } from 'react-router-dom';
+import useInput from '../../Hook/useInput';
 import { AiFillDelete } from "react-icons/ai"
 import { AiFillEdit } from "react-icons/ai"
 import { useDispatch } from 'react-redux';
 import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/PostsSlice';
+
 
 
 
@@ -31,9 +33,15 @@ function Sidebar(ThisData) {
     // Deatil에서 수정을 위한 State들 
     // 현재있는디테일페이지에 id값을 받아와서 적용
     // 변경할 내용들을 담을 state 들
+    const [tagetTitle, onChangeTitleHandler, setTagetTitle] = useInput();
+    const [tagetBody, onChangeBodyHandler, setTagetBody] = useInput('');
+    // const [tagetTitle, setTagetTitle] = useState('');
+    // const [tagetBody, setTagetBody] = useState('');
 
-    const [tagetTitle, setTagetTitle] = useState('');
-    const [tagetBody, setTagetBody] = useState('');
+
+
+
+
     const ChangeInputObj = {
         title: tagetTitle,
         body: tagetBody,
@@ -59,7 +67,6 @@ function Sidebar(ThisData) {
         setOpen('none');
         setTagetTitle('');
         setTagetBody('');
-
     }
 
 
@@ -72,10 +79,7 @@ function Sidebar(ThisData) {
 
                 <AiFillEdit
                     onClick={OpenModal}
-                    style={{
-                        fontSize: "1.25rem",
-                        background: "#fff"
-                    }} />
+                    style={{ fontSize: "1.25rem", background: "#fff" }} />
 
             </Btn>
 
@@ -96,9 +100,7 @@ function Sidebar(ThisData) {
                             <ModalFormInput
                                 type="text"
                                 value={tagetTitle}
-                                onChange={((e) => {
-                                    setTagetTitle(e.target.value)
-                                })}
+                                onChange={onChangeTitleHandler}
                                 required
                                 placeholder="수정할제목넣어" />
                         </div>
@@ -108,9 +110,7 @@ function Sidebar(ThisData) {
                             <ModalFormInput
                                 type="text"
                                 value={tagetBody}
-                                onChange={((e) => {
-                                    setTagetBody(e.target.value)
-                                })}
+                                onChange={onChangeBodyHandler}
                                 required
                                 placeholder="수정할내용넣어" />
                         </div>
@@ -232,4 +232,6 @@ const ModalFormInput = styled.input`
     border: none;
     border-radius: 1.875rem;
     padding-left: 1.25rem;
+    border: 2px solid black;
+    background: #fff;
 `

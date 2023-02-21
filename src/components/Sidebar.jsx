@@ -20,7 +20,8 @@ function Sidebar() {
         imageFile: "",
         viewUrl: "",
     });
-    // 초기화를 위해 set를 같이 가져가옴 
+
+    // UseInput 훅 초기화를 위해 set를 같이 가져가옴 
     const [title, onChangeTitleHandler, setTitle] = useInput();
     const [body, onChangeBodyHandler, setBody] = useInput();
     const [user, onChangeUserHandler, setUser] = useInput();
@@ -59,9 +60,12 @@ function Sidebar() {
     // 여기서 올라가면은 홈으로 이동하고 리-렌더릴이 일어나야만 한다
     const onSumitFormHandler = async (e) => {
         e.preventDefault()
+        // 값 보내고
         await dispatch(__postPosts(total))
+        // 다시 조회하기 
         dispatch(__getPosts())
-        setImageFile({viewUrl: ""});
+        // 파일 초기화 
+        setImageFile({ viewUrl: "" });
         setTitle('');
         setBody('');
         setUser('');

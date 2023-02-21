@@ -7,6 +7,8 @@ import { BiStar } from "react-icons/bi";
 
 
 const HeaderArea = styled.div`
+    position: fixed;
+    top: 0;
     background: #222831;
     width: 100%;
     height: 4.25rem;
@@ -21,7 +23,7 @@ const HeaderArea = styled.div`
 `;
 
 const HeaderLogo = styled.div`
-   
+     background: #222831;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,6 +31,7 @@ const HeaderLogo = styled.div`
     height: 2rem;
     gap: 1.25rem;
     > h2 {
+        background: #222831;
         font-weight: 700;
         text-shadow: 2px 2px 2px gray;
     };
@@ -37,6 +40,7 @@ const HeaderLogo = styled.div`
         background: white;
     }
     > h3{
+        background: #222831;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -62,6 +66,7 @@ function Header() {
             <HeaderLogo><BiStar style={{
                 width: '2rem',
                 height: "2rem",
+                background: "#222831"
             }} /></HeaderLogo>
             <HeaderLogo>
                 <h2>StarLog</h2>

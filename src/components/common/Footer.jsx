@@ -17,12 +17,9 @@ const FooterArea = styled.footer`
         font-size: .9375rem;
         color: #fff;
         margin: 0 auto;
+        background: #222831;
     };
-    > span {
-        font-size: .9375rem;
-        color: #fff;
-        font-weight: 800;
-    }
+  
 `;
 
 
@@ -32,7 +29,7 @@ const FooterArea = styled.footer`
 export default function Footer() {
     return (
         <FooterArea>
-            <p>© HH99 Project <span>Harry</span> 2023 | All rights reserved.</p>
+            <p>© HH99 Project  by: Harry 2023 | All rights reserved.</p>
         </FooterArea>
     )
 }

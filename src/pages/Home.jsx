@@ -9,7 +9,6 @@ import Footer from '../components/common/Footer'
 const PageSize = styled.div`
     max-width: 80rem;
     margin: 1rem auto;
-    background: #393E46;
     border-radius: 20px;
     justify-content: center;
 `;
@@ -22,6 +21,7 @@ function Home() {
 
 
             <List />
+
             <Sidebar />
 
             <Footer />

@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-weight: normal;
     font-style: normal;
+    background: #393E46;
     
  }
 `;

@@ -61,10 +61,29 @@ function List() {
 
     return (
         <ListArea>
+            {/* <PostArea1>
+                <PostAreaInDiv1>
+                    <div></div>
+                </PostAreaInDiv1>
+
+                <PostAreaInDiv2>
+                    <h3>ddd</h3>
+                    <p>Dasdasdasdasdasdasdasdasdasdasdasdasdasd
+                        dasdasdasdasdasdasdasdas
+                        asdasdasdasdasdasdasdasdasd
+                        asdasdasdasdasdasdasdasdasdas
+                        asdasdasdasdasdasdsad
+                    </p>
+                    <span>음지훈 님! </span>
+                </PostAreaInDiv2>
+            </PostArea1> */}
             {
+
                 // React 는 렌더링이 화면에 커밋 된 후에야 모든 효과를 실행하기 때문이다.
                 // 즉 React는 return에서 postslist.map(...)을 반복실행할 때 첫 턴에 데이터가 
                 // 아직 안들어와도 렌더링이 실행되며 당연히 그 데이터는 undefined로 정의되어 오류가 나는 것이다.
+
+
                 postslist && postslist.map((item) => {
                     return (
                         // onClick={onClickDeatilPage}
@@ -73,13 +92,15 @@ function List() {
                             key={item.id}
                             onClick={(() => { onClickDeatilPage(item.id) })}
                         >
-                            <div><WrapImg src={item.imageFile} /></div>
+                            <PostAreaInDiv1>
+                                <img src={item.imageFile} />
+                            </PostAreaInDiv1>
 
-                            <div>
-                                <WrapH3>{item.title}</WrapH3>
-                                <WarpP>{item.body} </WarpP>
-                                <WarpSpan>{item.user}</WarpSpan>
-                            </div>
+                            <PostAreaInDiv2>
+                                <h3>{item.title}</h3>
+                                <p>{item.body} </p>
+                                <span>{item.user} 님! </span>
+                            </PostAreaInDiv2>
 
                         </PostArea>
                     )
@@ -92,7 +113,89 @@ function List() {
 
 export default List
 
+const PostArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50rem;
+  height: 14.375rem;
+  border: .1563rem solid black;
+  border-radius: 1.25rem;
+  background: #222831;
+  margin-bottom: 3.125rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+ 
+`;
+
+const PostAreaInDiv1 = styled.div`
+    width: 30%;
+    height: 95%;
+    border: 2px solid black;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > img {
+    border: 1px solid black;
+    width: 95%;
+    height: 95%;
+    background: #eee;
+    border-radius: 1.25rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+ `;
+
+const PostAreaInDiv2 = styled.div`
+ width: 65%;
+ height: 95%;
+ border: 2px solid black;
+ border-radius: 1.25rem;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ > h3 {
+    margin: .625rem auto;
+    width:  17.1875rem;
+    height: 2.25rem;
+    padding: .625rem;
+    background: #EEEEEE;
+    text-align: center;
+    border-radius: 1.25rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+ };
+ > p {
+    margin: .625rem;
+    padding: 1.25rem;
+    width: 28.125rem;
+    height: 6.25rem;
+    border-radius: 1.25rem;
+    background: #EEEEEE;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+ }
+ > span {
+
+    width: 8.0625rem;
+    height: 1.125rem;
+    background: #EEEEEE;
+    border-radius: 1.25rem;
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+ }
+`;
+
+
+
+
+
+
 const ListArea = styled.div`
+    margin-top: 3.125rem;
     padding-top: 3.125rem;
     display: flex;
     flex-wrap: wrap;
@@ -100,54 +203,74 @@ const ListArea = styled.div`
     /* height 조정 필요 */
     gap: 5rem 10rem;
     justify-content: center;
+ 
 
 `;
 
-const PostArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 50rem;
-  height: 12.5rem;
-  border-radius: 1.25rem;
-  background: white;
-  margin-bottom: 3.125rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+// const PostArea = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
   
-`;
+//   width: 50rem;
+//   height: 14.375rem;
+//   border: .1563rem solid black;
+//   border-radius: 1.25rem;
+//   background: #222831;
+//   margin-bottom: 3.125rem;
+//   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+//   gap: 10px;
+// `;
 
-const WrapImg = styled.img`
-   margin: 10px;
-    width: 12.5rem;
-    height: 11.25rem;
-    background: #eee;
+// const WarpDiv = styled.div`
+//     width: 80%;
+//     height: 90%;
+//     margin: .4688rem auto;
+//     border-radius: 1.25rem;
+//     gap: 20px;
+// `
 
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-`;
-const WrapH3 = styled.h3`
-    margin: .625rem 0;
-    width: 35.4375rem;
-    height: 2.625rem;
-    padding: .625rem;
-    background: #EEEEEE;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
-`;
-const WarpP = styled.p`
-  margin-bottom: .625rem;
-  padding: .625rem;
-  width: 35.375rem;
-  height: 6.25rem;
-  background: #EEEEEE;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+// const WrapImg = styled.img`
+//     border: 1px solid black;
+//     margin: 10px;
+//     width: 12.5rem;
+//     height: 11.25rem;
+//     background: #eee;
+//     border-radius: 1.25rem;
+//     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+// `;
+// const WrapH3 = styled.h3`
+//     margin: .625rem auto;
+//     width: 25rem;
+//     height: 2.625rem;
+//     padding: .625rem;
+//     background: #EEEEEE;
+//     border-radius: 1.25rem;
+//     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+//     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+// `;
+// const WarpP = styled.p`
+//   margin-bottom: .625rem;
+//   padding: .625rem;
+//   width: 34.375rem;
+//   height: 6.25rem;
+//   border-radius: 1.25rem;
+//   background: #EEEEEE;
+//   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   
 
-`
-const WarpSpan = styled.p`
-  width: 8.0625rem;
-  height: 1.125rem;
-  background: #EEEEEE;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-`
+// `
+// const WarpSpan = styled.p`
+
+//   width: 8.0625rem;
+//   height: 1.125rem;
+//   background: #EEEEEE;
+//   margin: 0 auto;
+//   border-radius: 1.25rem;
+//   text-align: center;
+//   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+//   text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+// `
 
 

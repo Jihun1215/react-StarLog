@@ -20,10 +20,10 @@ function Sidebar() {
         imageFile: "",
         viewUrl: "",
     });
-
-    const [title, onChangeTitleHandler, reset] = useInput();
-    const [body, onChangeBodyHandler] = useInput();
-    const [user, onChangeUserHandler] = useInput();
+    // 초기화를 위해 set를 같이 가져가옴 
+    const [title, onChangeTitleHandler, setTitle] = useInput();
+    const [body, onChangeBodyHandler, setBody] = useInput();
+    const [user, onChangeUserHandler, setUser] = useInput();
 
 
     const onClicktest = () => {
@@ -61,10 +61,10 @@ function Sidebar() {
         e.preventDefault()
         await dispatch(__postPosts(total))
         dispatch(__getPosts())
-        setImageFile('');
-        // setTitle('');
-        // setBody('');
-        // setUser('');
+        setImageFile({viewUrl: ""});
+        setTitle('');
+        setBody('');
+        setUser('');
 
         setOpen('none')
 

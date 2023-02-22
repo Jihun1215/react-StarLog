@@ -1,42 +1,36 @@
 import React from 'react'
-import styled from 'styled-components'
-import Header from '../components/common/Header'
-import Footer from '../components/common/Footer'
-import useInput from '../Hook/useInput'
-import axios from 'axios'
+import styled from 'styled-components';
+import Header from '../components/common/Header';
+import Footer from '../components/common/Footer';
+import useInput from '../Hook/useInput';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-function Login() {
+function Signup() {
     const navigate = useNavigate();
-    const moveToSignup = () => navigate('/signup');
+    const moveToLogin = () => navigate('/login');
 
-    const [id, onChangeLoginIdInputHandler, setId] = useInput();
-    const [pw, onChangeLoginPwInputHandler, setpw] = useInput();
+    const [id, onChangeIdHandelr, setId] = useInput();
+    const [pw, onChangePWHandelr, setPW] = useInput();
 
-
-
-
-
-
-    const LoginFormHandler = async (e) => {
+    const SignUpFrom = async (e) => {
         e.preventDefault();
-        // 로그인 성공 시 
+
         try {
-            const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
+            const response = await axios.post('http://3.38.191.164/register', { id: id, password: pw });
             console.log(response)
 
         }
-        // 실패시 
         catch (error) {
             console.log(error)
         }
 
-
-
         setId('');
-        setpw('');
+        setPW('');
     }
+
+
 
 
     return (
@@ -44,10 +38,10 @@ function Login() {
             <Header />
             <LoginLayout>
 
-                <LoginArea onSubmit={LoginFormHandler}>
+                <LoginArea onSubmit={SignUpFrom}>
                     <LoginINBox>
                         <LoginAreaLogo>
-                            <h2>⭐️STAR LOG LOGIN</h2></LoginAreaLogo>
+                            <h2>⭐️STAR LOG SIGN UP</h2></LoginAreaLogo>
 
                         <LoginAreaInputBox>
 
@@ -58,7 +52,7 @@ function Login() {
                                     type="text"
                                     placeholder='ID 입력해주세요!'
                                     value={id}
-                                    onChange={onChangeLoginIdInputHandler} />
+                                    onChange={onChangeIdHandelr} />
                             </LoginEachInput>
                             <LoginEachInput>
                                 <p>비밀번호</p>
@@ -66,16 +60,16 @@ function Login() {
                                     type="password"
                                     placeholder="PW 입력해주세요!"
                                     value={pw}
-                                    onChange={onChangeLoginPwInputHandler} />
+                                    onChange={onChangePWHandelr} />
                             </LoginEachInput>
 
                         </LoginAreaInputBox>
 
                         <LoginAreaButton>
-                            <button type='submit'>로그인 하기</button>
+                            <button type='submit'>화원가입하기! </button>
                         </LoginAreaButton>
 
-                        <LoginAreaGoToSignUP onClick={moveToSignup}>회원가입하러 가기</LoginAreaGoToSignUP>
+                        <LoginAreaGoToSignUP onClick={moveToLogin}>로그인 하러 가기</LoginAreaGoToSignUP>
                     </LoginINBox>
                 </LoginArea>
 
@@ -85,7 +79,7 @@ function Login() {
     )
 }
 
-export default Login
+export default Signup
 
 
 
@@ -185,7 +179,6 @@ const LoginAreaButton = styled.div`
         height: 3.125rem;
         background: #fff;
         border-radius: 1.25rem;
-
     }
 `;
 

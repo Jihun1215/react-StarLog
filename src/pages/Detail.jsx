@@ -21,7 +21,7 @@ function Detail() {
     }, [dispatch]);
 
     const foundData = postslist.find((item) => item.id === Number(id));
-    console.log(foundData)
+    // console.log(foundData)
 
     // navigate훅을 이용해서 돌아가기 구현 
     const navigate = useNavigate();

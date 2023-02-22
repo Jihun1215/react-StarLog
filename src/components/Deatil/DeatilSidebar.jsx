@@ -12,7 +12,7 @@ import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/Pos
 
 
 function Sidebar(foundData) {
-    console.log(foundData)
+    // console.log(foundData)
 
     const [open, setOpen] = useState('none');
     const OpenModal = (e) => (e.target.name === 'first' ? setOpen('block') : null);

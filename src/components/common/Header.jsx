@@ -9,6 +9,7 @@ import { BiStar } from "react-icons/bi";
 const HeaderArea = styled.div`
     position: fixed;
     top: 0;
+    left: 0;
     background: #222831;
     width: 100%;
     height: 4.25rem;

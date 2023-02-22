@@ -43,7 +43,8 @@ function Sidebar() {
         body: body,
         user: user,
         viewUrl: imageFile.viewUrl,
-    }
+        date: new Intl.DateTimeFormat('kr').format(new Date()),
+    };
 
     const navigate = useNavigate()
     const gotoHomepage = () => {

@@ -8,10 +8,7 @@ import Footer from '../components/common/Footer';
 import { __getPosts } from '../redux/modules/PostsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-
-
 // 상세보기에서 수정과 삭제를 해야 한다 
-
 
 function Detail() {
     const dispatch = useDispatch();
@@ -19,14 +16,9 @@ function Detail() {
     // 구조분해 할당으로 todoSlice에 값들을 가져온다 
     const postslist = useSelector(state => state.Posts.postslist)
 
-
-
-
-
     useEffect(() => {
         dispatch(__getPosts());
     }, [dispatch]);
-
 
     const foundData = postslist.find((item) => item.id === Number(id));
     console.log(foundData)
@@ -36,10 +28,7 @@ function Detail() {
     const moveToHome = () => navigate('/');
 
     return (
-
         <>
-
-
             {postslist.length !== 0 && (
 
                 <DeatailPageSize>
@@ -60,8 +49,6 @@ function Detail() {
                         </PostsAreaDiv2>
 
                     </PostsArea>
-
-
 
                     <div style={{ display: 'flex', }}>
                         <Btn onClick={moveToHome}

@@ -27,7 +27,7 @@ export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI
 // Post
 export const __postPosts = createAsyncThunk('post/Posts', async (payload, thunkAPI) => {
     try {
-        api.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl });
+        api.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl, date: payload.date });
         // 데이터를 넣고 리렌더링을 위해 조회함수 넣어여함
         const response = await api.get('/posts');
         console.log('제발작성성공좀해주세요', response.data)

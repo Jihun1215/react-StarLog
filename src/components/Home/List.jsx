@@ -100,7 +100,13 @@ function List() {
                             <PostAreaInDiv2>
                                 <h3>{item.title}</h3>
                                 <p>{item.body} </p>
-                                <span>{item.user} 님! </span>
+
+                           <ListAreaUserandDate >
+                          <span>{item.user} 님! </span>
+                                <span>{item.date} </span>   
+                            </ListAreaUserandDate>
+                        
+
                             </PostAreaInDiv2>
 
                         </PostArea>
@@ -189,6 +195,23 @@ const PostAreaInDiv2 = styled.div`
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
  }
 `;
+
+const ListAreaUserandDate = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0 150px;
+    > span { 
+     width: 8.0625rem;
+    height: 1.125rem;
+    background: #EEEEEE;
+    border-radius: 1.25rem;
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
+    }
+`
 
 
 

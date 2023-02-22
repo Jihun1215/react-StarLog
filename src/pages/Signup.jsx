@@ -5,6 +5,7 @@ import Footer from '../components/common/Footer';
 import useInput from '../Hook/useInput';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import { Cookies } from 'react-cookie';
 
 
 function Signup() {
@@ -14,16 +15,21 @@ function Signup() {
     const [id, onChangeIdHandelr, setId] = useInput();
     const [pw, onChangePWHandelr, setPW] = useInput();
 
+
+
+
     const SignUpFrom = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post('http://3.38.191.164/register', { id: id, password: pw });
-            console.log(response)
+            console.log('response:', response)
+
 
         }
         catch (error) {
             console.log(error)
+            alert('오류 발생! ')
         }
 
         setId('');

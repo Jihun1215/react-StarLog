@@ -5,17 +5,34 @@ import Footer from '../components/common/Footer'
 import useInput from '../Hook/useInput'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import { useCookies } from 'react-cookie';
 
 function Login() {
     const navigate = useNavigate();
     const moveToSignup = () => navigate('/signup');
 
+
+
     const [id, onChangeLoginIdInputHandler, setId] = useInput();
     const [pw, onChangeLoginPwInputHandler, setpw] = useInput();
 
+    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+    // let success = false;
 
 
+    // const logInUser = async (e) => {
+    //     e.preventDefault();
+    //     await axios
+    //         .post('http://3.38.191.164/login', { id: id, password: pw })
+    //         .then((response) => {
+    //             // 이걸 이용해서 값을  넣었다람쥐 
+    //             setCookie('userToken', response.data.token);
+    //             success = !success;
+    //         })
+    //         .catch(() => {
+    //             alert('에러');
+    //         });
+    // };
 
 
 
@@ -24,19 +41,47 @@ function Login() {
         // 로그인 성공 시 
         try {
             const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
-            console.log(response)
+            // 쿠키이름 토큰
+            setCookie('userToken', response.data.token);
+            alert('로그인 성공!')
+            // success = !success;
 
         }
         // 실패시 
         catch (error) {
-            console.log(error)
+            alert('잘못된로그인시도')
         }
-
-
 
         setId('');
         setpw('');
     }
+
+    // 로그아웃을 하면 
+    const logOut = () => {
+        removeCookie('userToken'); // 쿠키를 삭제
+        navigate('/'); // 메인 페이지로 이동
+    };
+
+
+
+    // const userCheck = async () => {
+    //     const token = cookies;
+    //     console.log(token)
+    //     await axios
+    //         .get('http://3.38.191.164/user', {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //         })
+    //         .then((response) => {
+    //             alert(response.data.message)
+    //         })
+    //         .catch(() => {
+    //             removeCookie('userToken')
+    //             alert('checkCookie error');
+
+    //         })
+    // }
 
 
     return (
@@ -77,8 +122,9 @@ function Login() {
 
                         <LoginAreaGoToSignUP onClick={moveToSignup}>회원가입하러 가기</LoginAreaGoToSignUP>
                     </LoginINBox>
-                </LoginArea>
 
+                </LoginArea>
+                <button onClick={logOut}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</button>
             </LoginLayout>
             <Footer />
         </>

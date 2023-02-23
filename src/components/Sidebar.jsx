@@ -147,6 +147,7 @@ function Sidebar() {
                                 ref={(refer) => (imageRef = refer)}
                                 onChange={onChangeUploadHandler}
                                 required
+
                             />
                         </SImageWrapper>
 
@@ -176,7 +177,10 @@ function Sidebar() {
                                 type="text"
                                 value={title}
                                 onChange={onChangeTitleHandler}
-                                required />
+                                required
+                                style={{
+                                    background: "#fff",
+                                }} />
 
                             <br /><br />
 
@@ -186,7 +190,10 @@ function Sidebar() {
                                 type="text"
                                 value={body}
                                 onChange={onChangeBodyHandler}
-                                required />
+                                required
+                                style={{
+                                    background: "#fff",
+                                }} />
                             <br /><br />
 
                             <label>user</label>
@@ -194,7 +201,10 @@ function Sidebar() {
                                 type="text"
                                 value={user}
                                 onChange={onChangeUserHandler}
-                                required />
+                                required
+                                style={{
+                                    background: "#fff",
+                                }} />
 
                             <br /><br />
                             {/* <Btn formBtn> 게시물 작성 .. !</Btn> */}

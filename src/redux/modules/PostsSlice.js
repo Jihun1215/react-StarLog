@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from '../../axios/api'
+import { instance } from '../../axios/api'
 
 // 초기값 설정하기 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI) => {
     try {
         // payload에 해당하는 posts 찾기
-        const response = await api.get('/posts');
+        const response = await instance.get('/posts');
         // console.log('response', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -27,9 +27,9 @@ export const __getPosts = createAsyncThunk('get/Posts', async (payload, thunkAPI
 // Post
 export const __postPosts = createAsyncThunk('post/Posts', async (payload, thunkAPI) => {
     try {
-        api.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl, date: payload.date });
+        instance.post('/posts', { title: payload.title, body: payload.body, user: payload.user, imageFile: payload.viewUrl, date: payload.date });
         // 데이터를 넣고 리렌더링을 위해 조회함수 넣어여함
-        const response = await api.get('/posts');
+        const response = await instance.get('/posts');
         console.log('제발작성성공좀해주세요', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -41,8 +41,8 @@ export const __postPosts = createAsyncThunk('post/Posts', async (payload, thunkA
 // Delete 
 export const __deletePosts = createAsyncThunk('delete/Posts', async (payload, thunkAPI) => {
     try {
-        await api.delete(`/posts/${payload}`)
-        const response = await api.get('/posts');
+        await instance.delete(`/posts/${payload}`)
+        const response = await instance.get('/posts');
         console.log('제발삭제성공좀해주세요', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -53,8 +53,8 @@ export const __deletePosts = createAsyncThunk('delete/Posts', async (payload, th
 // patch
 export const __patchPosts = createAsyncThunk('pathc/Posts', async (payload, thunkAPI) => {
     try {
-        await api.patch(`/posts/${payload.id}`, { title: payload.title, body: payload.body, })
-        const response = await api.get('/posts');
+        await instance.patch(`/posts/${payload.id}`, { title: payload.title, body: payload.body, })
+        const response = await instance.get('/posts');
         console.log('제발수정성공좀해주세요', response.data)
         return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {

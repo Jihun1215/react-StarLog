@@ -6,13 +6,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import { jwtserver } from '../axios/api';
 
 
 
 
 function Signup() {
     const getToken = Cookies.get('userToken');
-    console.log(getToken)
+    // console.log(getToken)
 
 
     const navigate = useNavigate();
@@ -79,21 +80,17 @@ function Signup() {
         if (isName === true && isId === true && isPw === true) {
             
             try {
-                await axios.post('http://3.38.191.164/register', { id: inputID, password: inputPW });
+                await jwtserver.post('/register', { id: inputID, password: inputPW });
                 // console.log('response:', response)
                 alert('회원가입 성공');
             }
             catch (error) {
-                // 아이디가 같을 경우 
                 alert(error.response.data.message);
-          
-            }
+              }
             setInputName('');
             setInputID('');
             setInputPW('');
-        } else {
-            alert('아이디와 비밀번호를 조건에 맞게 입력해주세요')
-        }
+        } 
     }
 
 

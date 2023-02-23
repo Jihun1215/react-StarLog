@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Btn from '../components/common/Button'
 import Cookies from 'js-cookie';
+import { jwtserver } from '../axios/api'
 
 function Login() {
 
@@ -17,7 +18,7 @@ function Login() {
     // 토큰이 있을시 
     useEffect(() => {
         if (getToken) {
-            alert('로그인 중입니다.');
+            alert('로그인 유지중입니다.');
             navigate('/');
         }
     }, [navigate, getToken]);
@@ -60,7 +61,7 @@ function Login() {
         const expiryDate = new Date(Date.now() + 10 * 60 * 1000);
         // 로그인 성공 시 
         try {
-            const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
+            const response = await jwtserver.post('/login', { id: id, password: pw });
             // 쿠키이름 토큰
             const { token } = response.data;
             Cookies.set('token', token, { expires: expiryDate });

@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Btn from '../components/common/Button'
 import Cookies from 'js-cookie';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { jwtserver } from '../axios/api'
 
 function Login() {
@@ -139,22 +140,34 @@ function Login() {
                         <LoginAreaInputBox>
 
 
-                            <LoginEachInput>
+                            <LoginEachInputBox>
                                 <p>아이디</p>
-                                <input
-                                    type="text"
-                                    placeholder='ID 입력해주세요!'
-                                    value={id}
-                                    onChange={onChangeLoginIdInputHandler} />
-                            </LoginEachInput>
-                            <LoginEachInput>
+                                <LoginEachInputBoxInputArea>
+                                    <input
+                                        type="text"
+                                        placeholder='ID 입력해주세요!'
+                                        value={id}
+                                        onChange={onChangeLoginIdInputHandler} />
+                                    <div><FaUserAlt /></div>
+
+                                </LoginEachInputBoxInputArea>
+
+                            </LoginEachInputBox>
+
+
+                            <LoginEachInputBox>
+
                                 <p>비밀번호</p>
-                                <input
-                                    type="password"
-                                    placeholder="PW 입력해주세요!"
-                                    value={pw}
-                                    onChange={onChangeLoginPwInputHandler} />
-                            </LoginEachInput>
+                                <LoginEachInputBoxInputArea>
+                                    <input
+                                        type="password"
+                                        placeholder="PW 입력해주세요!"
+                                        value={pw}
+                                        onChange={onChangeLoginPwInputHandler} />
+                                    <div><FaLock /></div>
+                                </LoginEachInputBoxInputArea>
+
+                            </LoginEachInputBox>
 
                         </LoginAreaInputBox>
 
@@ -198,10 +211,10 @@ const LoginArea = styled.form`
     gap: 33px 0;
 `;
 
+
 const LoginINBox = styled.div`
     width: 500px;
     height: 95%;
-    /* border: 2px solid black; */
     gap: 1.5625rem 0;
     display: flex;
     flex-direction: column;
@@ -232,30 +245,6 @@ const LoginAreaInputBox = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 1.5625rem 0;
-   
-`;
-
-
-const LoginEachInput = styled.div`
-    width: 21.875rem;
-    height: 6.25rem;
-    border-radius: 1.25rem;
-    border: 2px solid black;  
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    gap: .625rem 0;
-    > p {
-       font-size: 1.15rem;
-       
-    };
-    > input {
-        width: 15.625rem;
-        height: 1.875rem;
-        background: #fff;
-        border-radius: .625rem;
-        padding-left: 1.25rem;
-    };
 `;
 
 
@@ -265,7 +254,6 @@ const LoginAreaButton = styled.div`
     width: 25rem;
     height: 4.375rem;
     margin: 0 auto;
-    border: 2px solid black;
     border-radius: 1.25rem;
     display: flex;
     justify-content: center;
@@ -285,3 +273,48 @@ const LoginAreaGoToSignUP = styled.div`
 `;
 
 
+
+
+const LoginEachInputBox = styled.div`
+    position: relative;
+    width: 21.875rem;
+    height: 6.875rem;
+    border-radius: 1.25rem;
+    border: 2px solid black;  
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: .625rem 0;
+    
+    > p {  
+        padding-top: .3125rem;
+    };
+    > span {
+        color: #45f3ff;
+    }
+   
+  `;
+
+const LoginEachInputBoxInputArea = styled.div`
+position: relative;
+width: 90%;
+height: 40%;
+
+> input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-left: 1.875rem;
+    border: none;
+    outline: none;
+    border-bottom : 2px solid black;
+    color: #fff;
+}
+> div {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+`

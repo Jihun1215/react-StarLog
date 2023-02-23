@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import Cookies from 'js-cookie';
 import { jwtserver } from '../axios/api';
+import Btn from '../components/common/Button';
 
 
 
@@ -174,7 +175,7 @@ function Signup() {
                         </LoginAreaInputBox>
 
                         <LoginAreaButton>
-                            <button type='submit'>화원가입하기! </button>
+                            <Btn type='submit'>화원가입하기! </Btn>
                         </LoginAreaButton>
 
                         <LoginAreaGoToSignUP onClick={moveToLogin}>로그인 하러 가기</LoginAreaGoToSignUP>
@@ -310,7 +311,6 @@ const LoginAreaButton = styled.div`
     width: 25rem;
     height: 4.375rem;
     margin: 0 auto;
-    border: 2px solid black;
     border-radius: 1.25rem;
     display: flex;
     justify-content: center;

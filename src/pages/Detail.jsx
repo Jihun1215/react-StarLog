@@ -71,8 +71,6 @@ const DeatailPageSize = styled.div`
     height: 52rem;
     margin: 1rem auto;
     background: #393E46;
-
-
 `;
 
 

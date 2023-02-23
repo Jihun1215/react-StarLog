@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+## 항해99 주특기과제 4 & 5 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### 폴더구조 
 
-In the project directory, you can run:
+```jsx
+📦src  
+ ┣ 📂Hook  
+ ┃ ┣ 📜Auth.jsx  
+ ┃ ┗ 📜useInput.jsx  
+ ┣ 📂axios  
+ ┃ ┗ 📜api.js  
+ ┣ 📂components  
+ ┃ ┣ 📂Deatil  
+ ┃ ┃ ┗ 📜DeatilSidebar.jsx  
+ ┃ ┣ 📂Home  
+ ┃ ┃ ┗ 📜List.jsx  
+ ┃ ┣ 📂common  
+ ┃ ┃ ┣ 📜Button.jsx  
+ ┃ ┃ ┣ 📜Footer.jsx  
+ ┃ ┃ ┗ 📜Header.jsx  
+ ┃ ┗ 📜Sidebar.jsx  
+ ┣ 📂pages  
+ ┃ ┣ 📜Detail.jsx  
+ ┃ ┣ 📜Home.jsx  
+ ┃ ┣ 📜Login.jsx  
+ ┃ ┗ 📜Signup.jsx  
+ ┣ 📂redux  
+ ┃ ┣ 📂config  
+ ┃ ┃ ┗ 📜configStore.js  
+ ┃ ┗ 📂modules  
+ ┃ ┃ ┗ 📜PostsSlice.js  
+ ┣ 📂shared  
+ ┃ ┗ 📜Router.jsx  
+ ┣ 📂style  
+ ┃ ┣ 📜GlobalStyle.jsx  
+ ┃ ┣ 📜mixin.jsx  
+ ┃ ┗ 📜theme.jsx  
+ ┣ 📜.DS_Store  
+ ┣ 📜App.jsx  
+ ┗ 📜index.js
+```
 
-### `yarn start`
+## 기간
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+23-02-18 ~ 23-02-23 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 기능
 
-### `yarn test`
+## 🛠️ TOOLS 
+ ![](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+##  🛠️ 기술스택
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ ![](https://img.shields.io/badge/Gir-F05032?style=for-the-badge&logo=Git&logoColor=white)
+ ![](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)
+  ![](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white)
+![](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+ ![](https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white)
+![](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white)
+![](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)
+![](https://img.shields.io/badge/JSON-000000?style=for-the-badge&logo=JSON&logoColor=white)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 웹뷰
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Home Page
+<img width="800" alt="스크린샷 2023-02-23 19 24 54" src="https://user-images.githubusercontent.com/95469708/220885299-cb4a063c-1ec2-4dbb-a63f-7cab9a3c68fc.png">
+#### 사이드바 + 버튼을 눌러 새로운 POSTS 등록 
 
-### Code Splitting
+<img width="800" alt="스크린샷 2023-02-23 19 25 02" src="https://user-images.githubusercontent.com/95469708/220885547-6e03a25e-1291-4fe7-a016-2808f4d867c3.png">
+등록된 POST를 클릭하면 상세페이지로 이동 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 상세페이지
 
-### Analyzing the Bundle Size
+<img width="800" alt="스크린샷 2023-02-23 19 25 21" src="https://user-images.githubusercontent.com/95469708/220885709-a66fd8d2-acce-4586-963b-d6e60f338c95.png">
+#### 사이드바 클릭하여 수정 및 삭제 가능 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img width="800" alt="스크린샷 2023-02-23 19 26 01" src="https://user-images.githubusercontent.com/95469708/220886446-db5edccd-7116-4268-a755-a128ddf8ae35.png">
 
-### Making a Progressive Web App
+#### 로그인 회원가입 페이지
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img width="800" alt="스크린샷 2023-02-23 19 54 26" src="https://user-images.githubusercontent.com/95469708/220887040-15071b66-5432-4ff3-9ec3-ca055437ae10.png">
+#### 정규식을 통해 아이디와 비밀번호를 조건에 맞게  회원가입
 
-### Advanced Configuration
+<img width="800" alt="스크린샷 2023-02-23 22 11 23" src="https://user-images.githubusercontent.com/95469708/220916399-67d303d0-8db1-401e-acc1-6db732bdd485.png">
+#### 로그인 성공시 서버 로부터 발급받은 토큰을 쿠키에 저장 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![[스크린샷 2023-02-23 19.58.40.png]]
 
-### Deployment
+### 쿠키에발급시간이 지나거나 삭제시  쿠키체크 함수를 통해 로그인페이지로 이동
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+

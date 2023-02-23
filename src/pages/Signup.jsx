@@ -5,10 +5,16 @@ import Footer from '../components/common/Footer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
+import Cookies from 'js-cookie';
+
 
 
 
 function Signup() {
+    const getToken = Cookies.get('userToken');
+    console.log(getToken)
+
+
     const navigate = useNavigate();
     const moveToLogin = () => navigate('/login');
 
@@ -26,20 +32,21 @@ function Signup() {
     const [isName, setIsName] = useState(false);
     const [isId, setIsId] = useState(false);
     const [isPw, setIsPw] = useState(false);
-
-
-    const NameonChangeHandler = (e) => {
-        setInputName(e.target.value)
+    
+    // 유저아이디 체크 
+    function NameonChangeHandler(e) {
+        setInputName(e.target.value);
         const NameReExp = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,6}$/;
         if (!NameReExp.test(e.target.value)) {
-            setNameMessage('영문이나 한글로 2 ~ 6자로 입력해주세요')
-            setIsName(false)
+            setNameMessage('영문이나 한글로 2 ~ 6자로 입력해주세요');
+            setIsName(false);
         } else {
-            setNameMessage('사용 가능한 닉네임입니다')
-            setIsName(true)
+            setNameMessage('사용 가능한 닉네임입니다');
+            setIsName(true);
         }
     }
 
+     // 유저아이디 체크 
     const IDonChangeHandler = (e) => {
         setInputID(e.target.value);
         const IdReExp = /^(?=.*[a-z0-9])[a-z0-9]{5,11}$/;
@@ -52,6 +59,7 @@ function Signup() {
         }
     }
 
+    // 유저비밀번호 체크 
     const PWonChangeHandler = (e) => {
         setInputPW(e.target.value);
         const IdReExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,12}$/;
@@ -64,6 +72,8 @@ function Signup() {
         }
     }
 
+
+    // 회원가입 폼 
     const SignUpFrom = async (e) => {
         e.preventDefault();
         if (isName === true && isId === true && isPw === true) {
@@ -74,6 +84,7 @@ function Signup() {
                 alert('회원가입 성공');
             }
             catch (error) {
+                // 아이디가 같을 경우 
                 alert(error.response.data.message);
           
             }

@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import Btn from './common/Button';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-// 아이콘 불러오기 
-import { BiPlus } from "react-icons/bi"
 import useInput from '../Hook/useInput';
 import { __getPosts } from '../redux/modules/PostsSlice';
 import { __postPosts } from '../redux/modules/PostsSlice';

@@ -5,11 +5,23 @@ import Footer from '../components/common/Footer'
 import useInput from '../Hook/useInput'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import Btn from '../components/common/Button'
+import Cookies from 'js-cookie';
 
 function Login() {
+
     const navigate = useNavigate();
+
+    const getToken = Cookies.get('token');
+
+    // 토큰이 있을시 
+    useEffect(() => {
+        if (getToken) {
+            alert('로그인 중입니다.');
+            navigate('/');
+        }
+    }, [navigate, getToken]);
+
     const moveToSignup = () => navigate('/signup');
 
 
@@ -17,7 +29,7 @@ function Login() {
     const [id, onChangeLoginIdInputHandler, setId] = useInput();
     const [pw, onChangeLoginPwInputHandler, setpw] = useInput();
 
-    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+    // const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
     // let success = false;
 
 
@@ -45,17 +57,21 @@ function Login() {
 
     const LoginFormHandler = async (e) => {
         e.preventDefault();
+        const expiryDate = new Date(Date.now() + 10 * 60 * 1000);
         // 로그인 성공 시 
         try {
             const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
             // 쿠키이름 토큰
-            setCookie('userToken', response.data.token);
-            alert('로그인 성공!')
+            const { token } = response.data;
+            Cookies.set('token', token, { expires: expiryDate });
+            navigate('/');
+            // setCookie('userToken', response.data.token);
+            // alert('로그인 성공!')
             // success = !success;
         }
         // 실패시 
         catch (error) {
-            alert('아이디, 비밀번호가 맞지 않습니다')
+            alert(`${error.response.data.message}`);
         }
         setId('');
         setpw('');
@@ -88,29 +104,25 @@ function Login() {
     // };
 
 
-    // 토큰이 있을시 
-    const token = cookies.userToken;
-    useEffect(() => {
-        userCheck(token);
-    }, [cookies.userToken]);
 
-    const userCheck = async () => {
-        await axios
-            .get('http://3.38.191.164/user', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-            })
-            .then((response) => {
-                alert(response.data.message)
-                navigate('/')
-            })
-            .catch((error) => {
-                // removeCookie('userToken')
-                alert(error.response.data.message);
 
-            })
-    }
+    // const userCheck = async () => {
+    //     await axios
+    //         .get('http://3.38.191.164/user', {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //         })
+    //         .then((response) => {
+    //             alert(response.data.message)
+    //             navigate('/')
+    //         })
+    //         .catch((error) => {
+    //             // removeCookie('userToken')
+    //             alert(error.response.data.message);
+
+    //         })
+    // }
 
 
     return (

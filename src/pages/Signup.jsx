@@ -67,14 +67,15 @@ function Signup() {
     const SignUpFrom = async (e) => {
         e.preventDefault();
         if (isName === true && isId === true && isPw === true) {
-
+            
             try {
                 await axios.post('http://3.38.191.164/register', { id: inputID, password: inputPW });
                 // console.log('response:', response)
                 alert('회원가입 성공');
             }
             catch (error) {
-                alert('ㅇ');
+                alert(error.response.data.message);
+          
             }
             setInputName('');
             setInputID('');

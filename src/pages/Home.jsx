@@ -6,6 +6,7 @@ import List from '../components/Home/List'
 import styled from 'styled-components'
 import Footer from '../components/common/Footer'
 
+
 const PageSize = styled.div`
     max-width: 80rem;
     margin: 1rem auto;
@@ -14,6 +15,7 @@ const PageSize = styled.div`
 `;
 
 function Home() {
+
     return (
         <PageSize>
 

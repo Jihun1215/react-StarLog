@@ -107,7 +107,18 @@ const DefailtButton = styled.button`
     height: 2.5rem;
     background: #;
   `};
+  ${(props) =>
+    props.loginbtn &&
+    css`
+    margin: 0 auto;
+    width : 12.5rem;
+    height: 2.5rem;
+    color: #444;
+    background: #;
+  `};
 
+
+  
 
 
   

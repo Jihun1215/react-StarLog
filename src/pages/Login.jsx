@@ -17,9 +17,12 @@ function Login() {
     const [id, onChangeLoginIdInputHandler, setId] = useInput();
     const [pw, onChangeLoginPwInputHandler, setpw] = useInput();
 
-    const [cookies, setCookie, removeCookie] = useCookies(['id']);
+    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
     // let success = false;
-    console.log(cookies.userToken)
+
+
+
+
 
 
 
@@ -30,12 +33,13 @@ function Login() {
     //         .then((response) => {
     //             // 이걸 이용해서 값을  넣었다람쥐 
     //             setCookie('userToken', response.data.token);
-    //             success = !success;
+    //             // success = !success;
     //         })
     //         .catch(() => {
     //             alert('에러');
     //         });
     // };
+
 
 
 
@@ -45,33 +49,34 @@ function Login() {
         try {
             const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
             // 쿠키이름 토큰
-            setCookie('id', response.data.token);
+            setCookie('userToken', response.data.token);
             alert('로그인 성공!')
             // success = !success;
-
         }
         // 실패시 
         catch (error) {
-            alert('잘못된로그인시도')
+            alert('아이디, 비밀번호가 맞지 않습니다')
         }
-
         setId('');
         setpw('');
     }
 
 
 
-    const authCheck = () => { // 페이지에 들어올때 쿠키로 사용자 체크
-        const token = cookies.id; // 쿠키에서 id 를 꺼내기
-        axios
-            .get('http://3.38.191.164/user', { token: token }) // 토큰으로 서버에 인증 요청
-            .then((res) => {
-                setId(res.data.id); // 유저 아이디 표시를 위해 작성
-            })
-            .catch(() => {
-                // logOut(); // 에러 발생시 실행
-            });
-    };
+
+
+
+    // const authCheck = () => { // 페이지에 들어올때 쿠키로 사용자 체크
+    //     const token = cookies.id; // 쿠키에서 id 를 꺼내기
+    //     axios
+    //         .get('http://3.38.191.164/user', { token: token }) // 토큰으로 서버에 인증 요청
+    //         .then((res) => {
+    //             setId(res.data.id); // 유저 아이디 표시를 위해 작성
+    //         })
+    //         .catch(() => {
+    //             // logOut(); // 에러 발생시 실행
+    //         });
+    // };
 
     // useEffect(() => {
     //     authCheck(); // 로그인 체크 함수
@@ -83,26 +88,29 @@ function Login() {
     // };
 
 
+    // 토큰이 있을시 
+    const token = cookies.userToken;
+    useEffect(() => {
+        userCheck(token);
+    }, [cookies.userToken]);
 
+    const userCheck = async () => {
+        await axios
+            .get('http://3.38.191.164/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            })
+            .then((response) => {
+                alert(response.data.message)
+                navigate('/')
+            })
+            .catch((error) => {
+                // removeCookie('userToken')
+                alert(error.response.data.message);
 
-    // const userCheck = async () => {
-    //     const token = cookies;
-    //     console.log(token)
-    //     await axios
-    //         .get('http://3.38.191.164/user', {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             },
-    //         })
-    //         .then((response) => {
-    //             alert(response.data.message)
-    //         })
-    //         .catch(() => {
-    //             removeCookie('userToken')
-    //             alert('checkCookie error');
-
-    //         })
-    // }
+            })
+    }
 
 
     return (
@@ -146,8 +154,8 @@ function Login() {
                     </LoginINBox>
 
                 </LoginArea>
-                {/* onClick={logOut} */}
-                <Btn  >ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Btn>
+                {/* onClick={logOut}
+                <Btn  >ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Btn> */}
             </LoginLayout>
             <Footer />
         </>

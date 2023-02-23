@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 // 기존값 데이터를 불러와서 여기서 타이터 바인딩 
 function List() {
 
@@ -62,22 +63,7 @@ function List() {
 
     return (
         <ListArea>
-            {/* <PostArea1>
-                <PostAreaInDiv1>
-                    <div></div>
-                </PostAreaInDiv1>
-
-                <PostAreaInDiv2>
-                    <h3>ddd</h3>
-                    <p>Dasdasdasdasdasdasdasdasdasdasdasdasdasd
-                        dasdasdasdasdasdasdasdas
-                        asdasdasdasdasdasdasdasdasd
-                        asdasdasdasdasdasdasdasdasdas
-                        asdasdasdasdasdasdsad
-                    </p>
-                    <span>지훈 님! </span>
-                </PostAreaInDiv2>
-            </PostArea1> */}
+          
             {
 
                 // React 는 렌더링이 화면에 커밋 된 후에야 모든 효과를 실행하기 때문이다.

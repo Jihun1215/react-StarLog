@@ -1,40 +1,95 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import useInput from '../Hook/useInput';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { Cookies } from 'react-cookie';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
+
 
 
 function Signup() {
     const navigate = useNavigate();
     const moveToLogin = () => navigate('/login');
 
-    const [id, onChangeIdHandelr, setId] = useInput();
-    const [pw, onChangePWHandelr, setPW] = useInput();
+    const [inputname, setInputName] = useState('');
+    const [inputID, setInputID] = useState('');
+    const [inputPW, setInputPW] = useState('');
 
 
+    // 오류 메세지
+    const [nameMessage, setNameMessage] = useState('');
+    const [idMessage, setIdMessage] = useState('');
+    const [pwMessage, setPwMessage] = useState('');
 
+    // 유효성 검사 둘다 true 일시 버튼 클릭 가넝
+    const [isName, setIsName] = useState(false);
+    const [isId, setIsId] = useState(false);
+    const [isPw, setIsPw] = useState(false);
+
+
+    const NameonChangeHandler = (e) => {
+        setInputName(e.target.value)
+        const NameReExp = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,6}$/;
+        if (!NameReExp.test(e.target.value)) {
+            setNameMessage('영문이나 한글로 2 ~ 6자로 입력해주세요')
+            setIsName(false)
+        } else {
+            setNameMessage('사용 가능한 닉네임입니다')
+            setIsName(true)
+        }
+    }
+
+    const IDonChangeHandler = (e) => {
+        setInputID(e.target.value);
+        const IdReExp = /^(?=.*[a-z0-9])[a-z0-9]{5,11}$/;
+        if (!IdReExp.test(e.target.value)) {
+            setIdMessage('영문이나 숫자로 6 ~ 10자로 입력해주세요');
+            setIsId(false);
+        } else {
+            setIdMessage('사용 가능한 이메일 입니다.');
+            setIsId(true);
+        }
+    }
+
+    const PWonChangeHandler = (e) => {
+        setInputPW(e.target.value);
+        const IdReExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,12}$/;
+        if (!IdReExp.test(e.target.value)) {
+            setPwMessage('영문과 숫자 조합으로 8 ~ 12자로 입력해주세요')
+            setIsPw(false);
+        } else {
+            setPwMessage('사용 가능한 비밀번호 입니다.');
+            setIsPw(true);
+        }
+    }
 
     const SignUpFrom = async (e) => {
         e.preventDefault();
+        if (isName === true && isId === true && isPw === true) {
 
-        try {
-            const response = await axios.post('http://3.38.191.164/register', { id: id, password: pw });
-            console.log('response:', response)
-
-
+            try {
+                await axios.post('http://3.38.191.164/register', { id: inputID, password: inputPW });
+                // console.log('response:', response)
+                alert('회원가입 성공');
+            }
+            catch (error) {
+                alert('ㅇ');
+            }
+            setInputName('');
+            setInputID('');
+            setInputPW('');
+        } else {
+            alert('아이디와 비밀번호를 조건에 맞게 입력해주세요')
         }
-        catch (error) {
-            console.log(error)
-            alert('오류 발생! ')
-        }
-
-        setId('');
-        setPW('');
     }
+
+
+    // const navigate = useNavigate();
+
+    // const moveRegistrationPg = () => {
+    //     navigate(-1);
+    // };
 
 
 
@@ -46,28 +101,66 @@ function Signup() {
 
                 <LoginArea onSubmit={SignUpFrom}>
                     <LoginINBox>
+
                         <LoginAreaLogo>
-                            <h2>⭐️STAR LOG SIGN UP</h2></LoginAreaLogo>
+                            <h2>⭐️SIGN UP</h2></LoginAreaLogo>
 
                         <LoginAreaInputBox>
 
+{/* 유저인풋 */}
+                            <LoginEachInputBox>
 
-                            <LoginEachInput>
-                                <p>아이디</p>
+
+                                <p>유저이름</p>
+
+                            <LoginEachInputBoxInputArea>
+
                                 <input
                                     type="text"
-                                    placeholder='ID 입력해주세요!'
-                                    value={id}
-                                    onChange={onChangeIdHandelr} />
-                            </LoginEachInput>
-                            <LoginEachInput>
+                                    placeholder='닉네임 입력해주세요!'
+                                    value={inputname}
+                                    onChange={NameonChangeHandler}
+                                />
+                                <div> <FaUserAlt /> </div>
+                                </LoginEachInputBoxInputArea>
+
+                                <span>  {nameMessage}</span>
+                            </LoginEachInputBox>
+
+         {/* 아이디 */}
+                            <LoginEachInputBox>
+
+                                <p>아이디</p>
+                        <LoginEachInputBoxInputArea>
+                             <input
+                                type="text"
+                                placeholder='ID 입력해주세요!'
+                                value={inputID}
+                                onChange={IDonChangeHandler} />
+                                <div> <FaUserAlt /> </div>
+                        </LoginEachInputBoxInputArea>
+                        <span>  {idMessage}</span>
+
+
+
+                               
+                            </LoginEachInputBox>
+
+            {/* 비밀번호 */}
+                            <LoginEachInputBox>
+
                                 <p>비밀번호</p>
+                                <LoginEachInputBoxInputArea>
                                 <input
                                     type="password"
                                     placeholder="PW 입력해주세요!"
-                                    value={pw}
-                                    onChange={onChangePWHandelr} />
-                            </LoginEachInput>
+                                    value={inputPW}
+                                    onChange={PWonChangeHandler} />
+                                    <div> <FaLock /> </div>
+                                    </LoginEachInputBoxInputArea>
+                                <span>  {pwMessage}</span>
+                            </LoginEachInputBox>
+
 
                         </LoginAreaInputBox>
 
@@ -123,7 +216,7 @@ const LoginINBox = styled.div`
 
 const LoginAreaLogo = styled.div`
     width: 15.625rem;
-    height: 4.6875rem;
+    height: 3.125rem;
     border: 2px solid black;
     border-radius: 1.25rem;
     display: flex;
@@ -133,7 +226,7 @@ const LoginAreaLogo = styled.div`
 
 const LoginAreaInputBox = styled.div`
     width: 31.25rem;
-    height: 25rem;
+    height: 40.625rem;
     margin: 0 auto;
     border: 2px solid black;
     border-radius: 1.25rem;
@@ -145,28 +238,61 @@ const LoginAreaInputBox = styled.div`
    
 `;
 
-
-const LoginEachInput = styled.div`
+const LoginEachInputBox = styled.div`
+    position: relative;
     width: 21.875rem;
-    height: 6.25rem;
+    height: 6.875rem;
     border-radius: 1.25rem;
     border: 2px solid black;  
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    padding: 15px;
+    align-items: center;
     gap: .625rem 0;
-    > p {
-       font-size: 1.15rem;
-       
+    
+    > p {  
+        padding-top: .3125rem;
     };
+    > span {
+        color: #45f3ff;
+    }
+   
+  `;
+
+
+
+
+
+const LoginEachInputBoxInputArea = styled.div`
+    position: relative;
+    width: 90%;
+    height: 60%;
+
     > input {
-        width: 15.625rem;
-        height: 1.875rem;
-        background: #fff;
-        border-radius: .625rem;
-        padding-left: 1.25rem;
-    };
-`;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding-left: 1.875rem;
+        border: none;
+        outline: none;
+        border-bottom : 2px solid black;
+        color: #fff;
+    }
+    > div {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+`
+
+
+
+
+
+
+
+
 
 
 
@@ -200,3 +326,46 @@ const LoginAreaGoToSignUP = styled.div`
 `;
 
 
+
+
+
+
+// const IputIN = styled.div`
+//     position: relative;
+//     width: 90%;
+//     height: 60%;
+
+//     > input {
+//         position: absolute;
+//         width: 100%;
+//         height: 100%;
+//         padding-left: 1.875rem;
+//         border: none;
+//         outline: none;
+//         border-bottom : 2px solid black;
+//         color: #fff;
+//     }
+//     > div {
+//         position: absolute;
+//         top: 50%;
+//         left: 0;
+//         transform: translateY(-50%);
+//     }
+// `
+
+// // > input {
+//     position: absolute;
+//     width: .625rem;
+//     height: 2.5rem;
+//     background: #fff;
+//     padding-left: 1.25rem;
+//     border-radius: 1.25rem;
+    
+//   };
+//   > div { 
+//    position: absolute;
+//   width: 14px;
+//   top: 40%;
+//   left: 10%;
+//   transform: translateX(-50%);
+//   };

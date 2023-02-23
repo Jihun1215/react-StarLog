@@ -4,8 +4,7 @@ import Btn from '../common/Button';
 // 아이콘 불러오기 
 import { useNavigate } from 'react-router-dom';
 import useInput from '../../Hook/useInput';
-import { AiFillDelete } from "react-icons/ai"
-import { AiFillEdit } from "react-icons/ai"
+import { AiFillDelete, AiFillEdit } from "react-icons/ai"
 import { useDispatch } from 'react-redux';
 import { __deletePosts, __getPosts, __patchPosts } from '../../redux/modules/PostsSlice';
 

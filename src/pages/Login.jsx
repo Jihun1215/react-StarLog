@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Header from '../components/common/Header'
 import Footer from '../components/common/Footer'
@@ -6,6 +6,7 @@ import useInput from '../Hook/useInput'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import Btn from '../components/common/Button'
 
 function Login() {
     const navigate = useNavigate();
@@ -16,8 +17,10 @@ function Login() {
     const [id, onChangeLoginIdInputHandler, setId] = useInput();
     const [pw, onChangeLoginPwInputHandler, setpw] = useInput();
 
-    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+    const [cookies, setCookie, removeCookie] = useCookies(['id']);
     // let success = false;
+    console.log(cookies.userToken)
+
 
 
     // const logInUser = async (e) => {
@@ -42,7 +45,7 @@ function Login() {
         try {
             const response = await axios.post('http://3.38.191.164/login', { id: id, password: pw });
             // 쿠키이름 토큰
-            setCookie('userToken', response.data.token);
+            setCookie('id', response.data.token);
             alert('로그인 성공!')
             // success = !success;
 
@@ -56,11 +59,29 @@ function Login() {
         setpw('');
     }
 
-    // 로그아웃을 하면 
-    const logOut = () => {
-        removeCookie('userToken'); // 쿠키를 삭제
-        navigate('/'); // 메인 페이지로 이동
+
+
+    const authCheck = () => { // 페이지에 들어올때 쿠키로 사용자 체크
+        const token = cookies.id; // 쿠키에서 id 를 꺼내기
+        axios
+            .get('http://3.38.191.164/user', { token: token }) // 토큰으로 서버에 인증 요청
+            .then((res) => {
+                setId(res.data.id); // 유저 아이디 표시를 위해 작성
+            })
+            .catch(() => {
+                // logOut(); // 에러 발생시 실행
+            });
     };
+
+    // useEffect(() => {
+    //     authCheck(); // 로그인 체크 함수
+    // });
+
+    // const logOut = () => {
+    //     removeCookie('id'); // 쿠키를 삭제
+    //     // navigate('/'); // 메인 페이지로 이동
+    // };
+
 
 
 
@@ -117,14 +138,16 @@ function Login() {
                         </LoginAreaInputBox>
 
                         <LoginAreaButton>
-                            <button type='submit'>로그인 하기</button>
+                            <Btn type='submit'
+                                loginbtn>로그인 하기</Btn>
                         </LoginAreaButton>
 
                         <LoginAreaGoToSignUP onClick={moveToSignup}>회원가입하러 가기</LoginAreaGoToSignUP>
                     </LoginINBox>
 
                 </LoginArea>
-                <button onClick={logOut}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</button>
+                {/* onClick={logOut} */}
+                <Btn  >ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Btn>
             </LoginLayout>
             <Footer />
         </>
@@ -226,13 +249,7 @@ const LoginAreaButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    > button {
-        width: 12.5rem;
-        height: 3.125rem;
-        background: #fff;
-        border-radius: 1.25rem;
-
-    }
+ 
 `;
 
 const LoginAreaGoToSignUP = styled.div`

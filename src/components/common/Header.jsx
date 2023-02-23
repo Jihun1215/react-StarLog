@@ -6,6 +6,7 @@ import { BiStar } from "react-icons/bi";
 
 
 
+
 const HeaderArea = styled.div`
     position: fixed;
     top: 0;
@@ -62,6 +63,7 @@ const HeaderLogo = styled.div`
 
 
 function Header() {
+
     return (
         <HeaderArea>
             <HeaderLogo><BiStar style={{
@@ -73,8 +75,8 @@ function Header() {
                 <h2>StarLog</h2>
             </HeaderLogo>
             <HeaderLogo>
-                <h3>LogIn</h3>
-                <h3>SignUp</h3>
+                <h3 >LogIn</h3>
+                <h3 >SignUp</h3>
             </HeaderLogo>
         </HeaderArea>
     )

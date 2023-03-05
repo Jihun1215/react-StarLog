@@ -80,53 +80,6 @@ function Login() {
     }
 
 
-
-
-
-
-    // const authCheck = () => { // 페이지에 들어올때 쿠키로 사용자 체크
-    //     const token = cookies.id; // 쿠키에서 id 를 꺼내기
-    //     axios
-    //         .get('http://3.38.191.164/user', { token: token }) // 토큰으로 서버에 인증 요청
-    //         .then((res) => {
-    //             setId(res.data.id); // 유저 아이디 표시를 위해 작성
-    //         })
-    //         .catch(() => {
-    //             // logOut(); // 에러 발생시 실행
-    //         });
-    // };
-
-    // useEffect(() => {
-    //     authCheck(); // 로그인 체크 함수
-    // });
-
-    // const logOut = () => {
-    //     removeCookie('id'); // 쿠키를 삭제
-    //     // navigate('/'); // 메인 페이지로 이동
-    // };
-
-
-
-
-    // const userCheck = async () => {
-    //     await axios
-    //         .get('http://3.38.191.164/user', {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             },
-    //         })
-    //         .then((response) => {
-    //             alert(response.data.message)
-    //             navigate('/')
-    //         })
-    //         .catch((error) => {
-    //             // removeCookie('userToken')
-    //             alert(error.response.data.message);
-
-    //         })
-    // }
-
-
     return (
         <>
             <Header />
@@ -180,8 +133,7 @@ function Login() {
                     </LoginINBox>
 
                 </LoginArea>
-                {/* onClick={logOut}
-                <Btn  >ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Btn> */}
+        
             </LoginLayout>
             <Footer />
         </>
@@ -222,8 +174,6 @@ const LoginINBox = styled.div`
     color: #fff;
 `;
 
-
-
 const LoginAreaLogo = styled.div`
     width: 15.625rem;
     height: 4.6875rem;
@@ -246,8 +196,6 @@ const LoginAreaInputBox = styled.div`
     flex-direction: column;
     gap: 1.5625rem 0;
 `;
-
-
 
 
 const LoginAreaButton = styled.div`
